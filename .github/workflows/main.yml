@@ -19,4 +19,4 @@ jobs:
           server: srv042127.webreus.net
           username: qixuanbadeend
           password: ${{ secrets.password }}
-          local-dir: subsites/aventus/barber/  # Pas aan als je alleen een map zoals 'dist/' wilt uploaden
+          local-dir: /subsites/aventus/barber/  # Pas aan als je alleen een map zoals 'dist/' wilt uploaden
