@@ -1,18 +1,22 @@
-on: push
-name: 🚀 Deploy website on push
+name: FTP Deploy
+
+on:
+  push:
+    branches:
+      - main  # Of je gebruikte branch
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  ftp-deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: srv042134.webreus.net
-        username: qixuanShiftsync
-        password: ${{ secrets.password }}
-        protocol: ftp
-        server-dir: subsites/aventus/barber
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: FTP upload
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: srv042127.webreus.net
+          username: qixuanbadeend
+          password: ${{ secrets.password }}
+          local-dir: ./subsites/aventus/barber  # Pas aan als je alleen een map zoals 'dist/' wilt uploaden
