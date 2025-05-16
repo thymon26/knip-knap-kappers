@@ -17,9 +17,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script>
-        console.log('THREE.GLTFLoader:', THREE.GLTFLoader);
-    </script>
+
 </head>
 <body>
 <div class="container">
@@ -58,7 +56,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
                     scene.add(light);
-
+                    console.log('THREE.GLTFLoader:', THREE.GLTFLoader);
                     const loader = new THREE.GLTFLoader();
                     let model;
                     loader.load('<?= htmlspecialchars($product['model_3d']) ?>', function (gltf) {
