@@ -56,7 +56,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
                     scene.add(light);
 
-                    const loader = new GLTFLoader();
+                    const loader = new THREE.GLTFLoader(); // <-- Gebruik THREE.GLTFLoader
                     let model;
                     loader.load('<?= htmlspecialchars($product['model_3d']) ?>', function (gltf) {
                         model = gltf.scene;
