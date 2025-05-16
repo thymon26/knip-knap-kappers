@@ -13,10 +13,6 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.151.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script>
-      console.log('THREE.GLTFLoader direct na laden:', THREE.GLTFLoader);
-    </script>
 </head>
 <body>
 <div class="container">
@@ -27,10 +23,9 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="card h-100">
             <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
             <div class="card-body">
-            <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
-            <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
-            <div class="product-viewer" data-model="<?= htmlspecialchars($product['model_3d']) ?>" style="height: 300px;"></div>
-        </div>
+                <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
+                <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
+            </div>
 
             <div class="card-footer">
                 <?php if (!empty($product['korting'])): ?>
@@ -43,59 +38,54 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <strong>€<?= number_format($product['prijs'], 2, ',', '.') ?></strong>
                 <?php endif; ?>
             </div>
+
             <?php if (!empty($product['model_3d'])): ?>
-                <div id="product-viewer-<?= $index ?>" style="height: 300px;"></div>
-                <script>
-                (function() {
-                    const scene = new THREE.Scene();
-                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 300, 0.1, 1000);
-                    const renderer = new THREE.WebGLRenderer({ alpha: true });
-                    renderer.setSize(window.innerWidth, 300);
-                    document.getElementById('product-viewer-<?= $index ?>').appendChild(renderer.domElement);
-
-                    const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-                    scene.add(light);
-                    console.log('THREE.GLTFLoader:', THREE.GLTFLoader);
-                    const loader = new THREE.GLTFLoader();
-                    let model;
-                    loader.load('<?= htmlspecialchars($product['model_3d']) ?>', function (gltf) {
-                        model = gltf.scene;
-                        scene.add(model);
-                        model.rotation.y = 0;
-                    });
-
-                    camera.position.z = 2;
-
-                    if (window.gsap && window.ScrollTrigger) {
-                        gsap.registerPlugin(ScrollTrigger);
-                        ScrollTrigger.create({
-                            trigger: "#product-viewer-<?= $index ?>",
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: true,
-                            onUpdate: self => {
-                                if (model) {
-                                    model.rotation.y = self.progress * Math.PI * 2;
-                                }
-                            }
-                        });
-                    }
-
-                    function animate() {
-                        requestAnimationFrame(animate);
-                        renderer.render(scene, camera);
-                    }
-                    animate();
-                })();
-                </script>
+                <div id="product-viewer-<?= $index ?>" class="product-viewer" data-model="<?= htmlspecialchars($product['model_3d']) ?>" style="height: 300px;"></div>
             <?php endif; ?>
         </div>
     </div>
 <?php endforeach; ?>
-
     </div>
 </div>
-<!-- Bootstrap JS CDN -->
+
+<!-- 3D Viewer Script (als module zodat GLTFLoader werkt) -->
+<script type="module">
+    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.151.0/examples/jsm/loaders/GLTFLoader.js';
+
+    document.querySelectorAll('.product-viewer').forEach((viewer, index) => {
+        const modelUrl = viewer.dataset.model;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(viewer.clientWidth, viewer.clientHeight);
+        viewer.appendChild(renderer.domElement);
+
+        const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+        scene.add(light);
+
+        const loader = new GLTFLoader();
+        let model;
+        loader.load(modelUrl, function (gltf) {
+            model = gltf.scene;
+            scene.add(model);
+            model.rotation.y = 0;
+        });
+
+        camera.position.z = 2;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (model) {
+                model.rotation.y += 0.005;
+            }
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    });
+</script>
+
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
