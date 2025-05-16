@@ -1,7 +1,6 @@
 <?php
 require_once 'db.php';
 
-// Producten ophalen uit de database
 $stmt = $pdo->query("SELECT * FROM producten");
 $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -12,6 +11,11 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Producten - Knip Knap Kappers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Three.js en GLTFLoader als normale scripts (NIET als modules) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.151.0/examples/js/loaders/GLTFLoader.js"></script>
+
     <style>
         .product-viewer canvas {
             width: 100% !important;
@@ -52,12 +56,10 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<!-- 3D Scripts als modules laden via CDN -->
-<script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.module.js';
-    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.151.0/examples/jsm/loaders/GLTFLoader.js';
-
-    document.querySelectorAll('.product-viewer').forEach(viewer => {
+<!-- 3D script dat zonder modules werkt -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.product-viewer').forEach(function(viewer) {
         const modelUrl = viewer.dataset.model;
         const width = viewer.clientWidth;
         const height = viewer.clientHeight;
@@ -71,12 +73,11 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
         const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
         scene.add(light);
 
-        const loader = new GLTFLoader();
+        const loader = new THREE.GLTFLoader();
         let model;
         loader.load(modelUrl, function (gltf) {
             model = gltf.scene;
             scene.add(model);
-            model.rotation.y = 0;
         });
 
         camera.position.z = 2;
@@ -84,16 +85,16 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
         function animate() {
             requestAnimationFrame(animate);
             if (model) {
-                model.rotation.y += 0.005;
+                model.rotation.y += 0.01;
             }
             renderer.render(scene, camera);
         }
 
         animate();
     });
+});
 </script>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
