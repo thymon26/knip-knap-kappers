@@ -15,6 +15,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
     <!-- Three.js CSS3DRenderer -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
 
 </head>
 <body>
@@ -25,11 +26,11 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="col-md-4 mb-4">
         <div class="card h-100">
             <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
-            <<div class="card-body">
-    <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
-    <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
-    <div class="product-viewer" data-model="<?= htmlspecialchars($product['model_3d']) ?>" style="height: 300px;"></div>
-</div>
+            <div class="card-body">
+            <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
+            <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
+            <div class="product-viewer" data-model="<?= htmlspecialchars($product['model_3d']) ?>" style="height: 300px;"></div>
+        </div>
 
             <div class="card-footer">
                 <?php if (!empty($product['korting'])): ?>
