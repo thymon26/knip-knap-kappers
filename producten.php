@@ -47,6 +47,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php if (!empty($product['model_3d'])): ?>
                 <div id="product-viewer-<?= $index ?>" style="height: 300px;"></div>
                 <script>
+                    import {GLTFLoader} from "https://cdn.rawgit.com/mrdoob/three.js/master/examples/jsm/loaders/GLTFLoader.js"
                 (function() {
                     const scene = new THREE.Scene();
                     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 300, 0.1, 1000);
