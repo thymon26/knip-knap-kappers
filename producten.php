@@ -14,9 +14,9 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-    <!-- Three.js CSS3DRenderer -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -56,7 +56,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
                     scene.add(light);
 
-                    const loader = new THREE.GLTFLoader();
+                    const loader = new GLTFLoader();
                     let model;
                     loader.load('<?= htmlspecialchars($product['model_3d']) ?>', function (gltf) {
                         model = gltf.scene;
@@ -66,18 +66,20 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     camera.position.z = 2;
 
-                    gsap.registerPlugin(ScrollTrigger);
-                    ScrollTrigger.create({
-                        trigger: "#product-viewer-<?= $index ?>",
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: true,
-                        onUpdate: self => {
-                            if (model) {
-                                model.rotation.y = self.progress * Math.PI * 2;
+                    if (window.gsap && window.ScrollTrigger) {
+                        gsap.registerPlugin(ScrollTrigger);
+                        ScrollTrigger.create({
+                            trigger: "#product-viewer-<?= $index ?>",
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true,
+                            onUpdate: self => {
+                                if (model) {
+                                    model.rotation.y = self.progress * Math.PI * 2;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
 
                     function animate() {
                         requestAnimationFrame(animate);
@@ -95,51 +97,5 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <!-- Bootstrap JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 500, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(window.innerWidth, 500);
-document.getElementById('product-viewer').appendChild(renderer.domElement);
-
-// Licht
-const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-scene.add(light);
-
-// Model laden
-const loader = new THREE.GLTFLoader();
-let model;
-
-loader.load('models/jouw_model.glb', (gltf) => {
-  model = gltf.scene;
-  scene.add(model);
-  model.rotation.y = 0;
-}, undefined, (error) => {
-  console.error('Fout bij laden model:', error);
-});
-
-camera.position.z = 2;
-
-// Scroll animatie
-gsap.registerPlugin(ScrollTrigger);
-ScrollTrigger.create({
-  trigger: "#product-viewer",
-  start: "top bottom",
-  end: "bottom top",
-  scrub: true,
-  onUpdate: self => {
-    if (model) {
-      model.rotation.y = self.progress * Math.PI * 2; // Draai volledig 360°
-    }
-  }
-});
-
-function animate() {
-  requestAnimationFrame(animate);
-  renderer.render(scene, camera);
-}
-animate();
-</script>
-
 </body>
 </html>
