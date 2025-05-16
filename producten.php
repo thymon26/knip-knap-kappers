@@ -140,56 +140,6 @@ function animate() {
 }
 animate();
 </script>
-    <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/controls/OrbitControls.js';
-import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/index.js';
-import { ScrollTrigger } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/ScrollTrigger.js';
-
-gsap.registerPlugin(ScrollTrigger);
-
-// voorbeeld viewer:
-const viewers = document.querySelectorAll("[data-model]");
-viewers.forEach((viewer, index) => {
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.setSize(viewer.clientWidth, viewer.clientHeight);
-  viewer.appendChild(renderer.domElement);
-
-  const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-  scene.add(light);
-
-  const loader = new GLTFLoader();
-  let model;
-  const modelPath = viewer.dataset.model;
-
-  loader.load(modelPath, (gltf) => {
-    model = gltf.scene;
-    scene.add(model);
-  });
-
-  camera.position.z = 2;
-
-  ScrollTrigger.create({
-    trigger: viewer,
-    start: "top bottom",
-    end: "bottom top",
-    scrub: true,
-    onUpdate: self => {
-      if (model) model.rotation.y = self.progress * Math.PI * 2;
-    }
-  });
-
-  function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-  }
-  animate();
-});
-</script>
-
 
 </body>
 </html>
