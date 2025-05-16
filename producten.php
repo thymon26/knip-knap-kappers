@@ -12,7 +12,6 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Producten - Knip Knap Kappers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -48,8 +47,9 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<!-- 3D Viewer Script (als module zodat GLTFLoader werkt) -->
+<!-- Module script voor 3D modellen -->
 <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.module.js';
     import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.151.0/examples/jsm/loaders/GLTFLoader.js';
 
     document.querySelectorAll('.product-viewer').forEach((viewer, index) => {
