@@ -38,22 +38,16 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
         object-position: center;
         transition: 
             transform 0.4s cubic-bezier(.4,2,.6,1), 
-            box-shadow 0.3s,
-            z-index 0.3s,
-            top 0.4s;
+            box-shadow 0.3s;
         position: relative;
         z-index: 2;
         background: none;
     }
     .card.h-100:hover .img-hover-wrapper .card-img-top {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        right: 0;
-        margin-left: auto;
-        margin-right: auto;
+        /* Alleen vergroten, niet verplaatsen */
         transform: scale(1.08);
         z-index: 20;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.18);
         background: none;
     }
     .card-body {
