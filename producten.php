@@ -11,15 +11,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Producten - Knip Knap Kappers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Three.js en GLTFLoader als normale scripts (NIET als modules) -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.151.0/examples/js/loaders/GLTFLoader.js"></script>
-<script>
-  // Gebruik van THREE zonder import
-  const scene = new THREE.Scene();
-</script>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         .product-viewer canvas {
             width: 100% !important;
@@ -51,53 +43,12 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <strong>€<?= number_format($product['prijs'], 2, ',', '.') ?></strong>
                 <?php endif; ?>
             </div>
-            <?php if (!empty($product['model_3d'])): ?>
-                <div id="product-viewer-<?= $index ?>" class="product-viewer" data-model="<?= htmlspecialchars($product['model_3d']) ?>" style="height: 300px;"></div>
-            <?php endif; ?>
         </div>
     </div>
 <?php endforeach; ?>
     </div>
 </div>
 
-<!-- 3D script dat zonder modules werkt -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.product-viewer').forEach(function(viewer) {
-        const modelUrl = viewer.dataset.model;
-        const width = viewer.clientWidth;
-        const height = viewer.clientHeight;
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(width, height);
-        viewer.appendChild(renderer.domElement);
-
-        const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-        scene.add(light);
-
-        const loader = new THREE.GLTFLoader();
-        let model;
-        loader.load(modelUrl, function (gltf) {
-            model = gltf.scene;
-            scene.add(model);
-        });
-
-        camera.position.z = 2;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            if (model) {
-                model.rotation.y += 0.01;
-            }
-            renderer.render(scene, camera);
-        }
-
-        animate();
-    });
-});
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
