@@ -47,7 +47,6 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
         /* Alleen vergroten, niet verplaatsen */
         transform: scale(1.08);
         z-index: 20;
-        box-shadow: 0 12px 32px rgba(0,0,0,0.18);
         background: none;
     }
     .card-body {
