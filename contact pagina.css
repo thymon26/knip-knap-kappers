@@ -1,0 +1,93 @@
+/* Algemene opmaak */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+/* Container voor de contactpagina */
+.contact-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+/* Titel */
+.contact-container h1 {
+    text-align: center;
+    color: #b48a78;
+    margin-bottom: 24px;
+    font-size: 2.2em;
+    letter-spacing: 1px;
+}
+
+/* Contactgegevens */
+.contact-info {
+    margin-bottom: 32px;
+}
+
+.contact-info p {
+    margin: 8px 0;
+    font-size: 1.1em;
+}
+
+.contact-info strong {
+    color: #b48a78;
+}
+
+/* Contactformulier */
+.contact-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #b48a78;
+    outline: none;
+}
+
+.contact-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.contact-form button {
+    background: #b48a78;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.contact-form button:hover {
+    background: #a06d5a;
+}
+
+/* Responsief */
+@media (max-width: 700px) {
+    .contact-container {
+        padding: 18px 8px;
+    }
+}
