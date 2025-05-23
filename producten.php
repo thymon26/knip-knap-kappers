@@ -18,6 +18,11 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
             height: 300px !important;
             display: block;
         }
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            object-position: center;
+        }
     </style>
 </head>
 <body>
