@@ -24,32 +24,38 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
         transition: transform 0.2s, box-shadow 0.2s;
         overflow: visible; /* belangrijk voor zweven */
     }
+    .img-hover-wrapper {
+        position: relative;
+        height: 220px; /* zelfde als max-height afbeelding */
+        width: 100%;
+        overflow: visible;
+        z-index: 1;
+    }
     .card-img-top {
         width: 100%;
-        height: auto;
-        max-height: 220px;
-        object-fit: contain; /* afbeelding wordt niet gecropt */
+        height: 100%;
+        object-fit: contain;
         object-position: center;
         transition: 
             transform 0.4s cubic-bezier(.4,2,.6,1), 
             box-shadow 0.3s,
             z-index 0.3s,
             top 0.4s;
-        z-index: 10;
         position: relative;
+        z-index: 2;
+        background: transparent;
     }
-    .card.h-100:hover .card-img-top {
+    .card.h-100:hover .img-hover-wrapper .card-img-top {
         position: absolute;
-        top: -40px; /* schuif de afbeelding boven de kaart */
+        top: -40px;
         left: 0;
         right: 0;
         margin-left: auto;
         margin-right: auto;
         transform: scale(1.08);
         box-shadow: 0 12px 32px rgba(0,0,0,0.18);
-        background: transparent;
         z-index: 20;
-        border-radius: 0; /* geen afgeronde hoeken */
+        background: transparent;
     }
     .card-body {
         flex: 1 1 auto;
@@ -89,7 +95,9 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php foreach ($producten as $index => $product): ?>
     <div class="col-md-4 mb-4">
         <div class="card h-100">
-            <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
+            <div class="img-hover-wrapper">
+                <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
+            </div>
             <div class="card-body">
                 <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
                 <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
