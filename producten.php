@@ -13,20 +13,34 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .product-viewer canvas {
-            width: 100% !important;
-            height: 300px !important;
-            display: block;
+        .row {
+            /* Zorg dat alle kaarten even hoog zijn */
+            align-items: stretch;
+        }
+        .card.h-100 {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+            overflow: hidden;
         }
         .card-img-top {
+            width: 100%;
             height: 220px;
             object-fit: cover;
             object-position: center;
+            flex-shrink: 0;
         }
-        .card.h-100 {
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            overflow: hidden;
+        .card-body {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .card-footer {
+            background: #fff;
+            border-top: none;
         }
         .card.h-100:hover {
             transform: translateY(-8px) scale(1.03);
