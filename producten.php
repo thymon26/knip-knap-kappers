@@ -53,9 +53,8 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
         margin-left: auto;
         margin-right: auto;
         transform: scale(1.08);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.18);
         z-index: 20;
-        background: transparent;
+        background: none;
     }
     .card-body {
         flex: 1 1 auto;
