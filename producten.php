@@ -43,7 +43,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
             top 0.4s;
         position: relative;
         z-index: 2;
-        background: transparent;
+        background: none;
     }
     .card.h-100:hover .img-hover-wrapper .card-img-top {
         position: absolute;
