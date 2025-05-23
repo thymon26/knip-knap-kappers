@@ -13,8 +13,12 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Three.js en GLTFLoader als normale scripts (NIET als modules) -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.151.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.151.0/examples/js/loaders/GLTFLoader.js"></script>
+<script>
+  // Gebruik van THREE zonder import
+  const scene = new THREE.Scene();
+</script>
 
     <style>
         .product-viewer canvas {
