@@ -23,6 +23,14 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
             object-fit: cover;
             object-position: center;
         }
+        .card.h-100 {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card.h-100:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
