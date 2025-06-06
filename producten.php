@@ -94,7 +94,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="row">
 <?php foreach ($producten as $index => $product): ?>
     <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card h-100" data-product-id="<?= $product['id'] ?>">
             <div class="img-hover-wrapper">
                 <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
             </div>
@@ -124,5 +124,73 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function setCartCookie(cart) {
+    document.cookie = "cart=" + encodeURIComponent(JSON.stringify(cart)) + ";path=/;max-age=31536000";
+}
+function getCartCookie() {
+    const match = document.cookie.match(/(?:^|; )cart=([^;]*)/);
+    return match ? JSON.parse(decodeURIComponent(match[1])) : [];
+}
+
+document.querySelectorAll('.add-to-cart-btn').forEach((btn, idx) => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Vind de kaart en afbeelding
+        const card = btn.closest('.card');
+        const img = card.querySelector('.card-img-top');
+        const rect = img.getBoundingClientRect();
+
+        // Clone de afbeelding
+        const clone = img.cloneNode(true);
+        clone.style.position = 'fixed';
+        clone.style.left = rect.left + 'px';
+        clone.style.top = rect.top + 'px';
+        clone.style.width = rect.width + 'px';
+        clone.style.height = rect.height + 'px';
+        clone.style.zIndex = 9999;
+        clone.style.pointerEvents = 'none';
+        clone.style.transition = 'all 0.8s cubic-bezier(.4,2,.6,1)';
+        document.body.appendChild(clone);
+
+        // Doelpositie (rechterbovenhoek, bv. 32px van rechts en 32px van boven)
+        const targetX = window.innerWidth - 64;
+        const targetY = 32;
+
+        // Force reflow voor animatie
+        void clone.offsetWidth;
+
+        // Start animatie
+        clone.style.left = targetX + 'px';
+        clone.style.top = targetY + 'px';
+        clone.style.width = '40px';
+        clone.style.height = '40px';
+        clone.style.opacity = '0.5';
+
+        // Verwijder de clone na animatie
+        setTimeout(() => {
+            clone.remove();
+        }, 900);
+
+        // Winkelwagen logica
+        const productId = card.getAttribute('data-product-id') || idx;
+        let cart = getCartCookie();
+        let found = cart.find(item => item.id == productId);
+        if(found) {
+            found.qty += 1;
+        } else {
+            cart.push({
+                id: productId,
+                naam: card.querySelector('.card-title').textContent,
+                afbeelding: img.src,
+                prijs: card.querySelector('.card-footer strong').textContent,
+                qty: 1
+            });
+        }
+        setCartCookie(cart);
+    });
+});
+</script>
 </body>
 </html>
