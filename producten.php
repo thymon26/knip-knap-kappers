@@ -358,11 +358,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <li><a href="#">Producten</a></li>
         <li><a href="#">Prijzen</a></li>
         <li><a href="#">Contact</a></li>
-        <li>
+        <li><a href="cart.php">
       <button class="cart-btn" id="cartBtn" style="background: none; border: none; position: relative; margin-right: 10px;">
         <i class="bi bi-cart" style="font-size: 1.7rem;"></i>
         <span id="cartCount" style="position: absolute; top: -6px; right: -8px; background: #bfa046; color: #fff; border-radius: 50%; font-size: 0.85rem; padding: 2px 7px; min-width: 22px; text-align: center;">0</span>
       </button>
+      </a>
       <button class="reserveren" onclick="location.href='/Pages/Reserveren.html'">Reserveren</button>
     </li>
 </ul>
@@ -444,7 +445,7 @@ document.querySelectorAll('.add-to-cart-btn').forEach((btn, idx) => {
         document.body.appendChild(clone);
 
         // Doelpositie (rechterbovenhoek, bv. 32px van rechts en 32px van boven)
-        const targetX = window.innerWidth - 64;
+        const targetX = window.innerWidth - 100;
         const targetY = 32;
 
         // Force reflow voor animatie
