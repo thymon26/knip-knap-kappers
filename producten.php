@@ -444,9 +444,11 @@ document.querySelectorAll('.add-to-cart-btn').forEach((btn, idx) => {
         clone.style.transition = 'all 0.8s cubic-bezier(.4,2,.6,1)';
         document.body.appendChild(clone);
 
-        // Doelpositie (rechterbovenhoek, bv. 32px van rechts en 32px van boven)
-        const targetX = window.innerWidth - 100;
-        const targetY = 32;
+        // Vind het winkelwagen-icoon als target
+        const cartBtn = document.getElementById('cartBtn');
+        const cartRect = cartBtn.getBoundingClientRect();
+        const targetX = cartRect.left + cartRect.width / 2 - 20; // 20 = halve eindbreedte van de clone
+        const targetY = cartRect.top + cartRect.height / 2 - 20;
 
         // Force reflow voor animatie
         void clone.offsetWidth;
