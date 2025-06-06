@@ -86,7 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Zoek adres in database
 function zoekAdres($postcode, $huisnummer, $pdo) {
+    // Maak uppercase en verwijder spaties
     $postcode = strtoupper(str_replace(' ', '', $postcode));
+    // Voeg spatie toe na 4 tekens
+    if (strlen($postcode) === 6) {
+        $postcode = substr($postcode, 0, 4) . ' ' . substr($postcode, 4, 2);
+    }
     $stmt = $pdo->prepare("SELECT straat, plaats FROM adressen WHERE postcode = ? AND huisnummer = ?");
     $stmt->execute([$postcode, $huisnummer]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
