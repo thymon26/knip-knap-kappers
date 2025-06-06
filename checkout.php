@@ -1,8 +1,8 @@
 <?php
 // Laad PHPMailer
-require_once __DIR__ . '/../PHPMailer/PHPMailer.php';
-require_once __DIR__ . '/../PHPMailer/SMTP.php';
-require_once __DIR__ . '/../PHPMailer/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+require 'phpmailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -50,12 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             // Server settings
             $mail->isSMTP();
-            $mail->Host = 'smtp.example.com'; // <-- Vervang door jouw SMTP-server
-            $mail->SMTPAuth = true;
-            $mail->Username = 'jouw@email.nl'; // <-- Vervang door jouw SMTP-gebruiker
-            $mail->Password = 'wachtwoord';    // <-- Vervang door jouw SMTP-wachtwoord
+            $mail->Host       = 'webreus.email';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'noreply@badeendensoep.nl';
+            $mail->Password   = 'Thym3n2oo8!';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+            $mail->Port       = 587;
 
             // Ontvanger & afzender
             $mail->setFrom('jouw@email.nl', 'Knip Knap Kappers');
