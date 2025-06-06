@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Port       = 587;
 
             // Ontvanger & afzender
-            $mail->setFrom('jouw@email.nl', 'Knip Knap Kappers');
+            $mail->setFrom('noreply@badeendensoep.nl', 'Knip Knap Kappers');
             $mail->addAddress($email, $naam);
 
             // Inhoud
@@ -98,15 +98,15 @@ function zoekAdres($postcode, $huisnummer, $pdo) {
 }
 
 // Gebruik:
-$adres = zoekAdres($_POST['postcode'], $_POST['huisnummer'], $pdo);
-if ($adres) {
-    // Vul straat en woonplaats automatisch in
-    $straat = $adres['straat'];
-    $woonplaats = $adres['plaats'];
-} else {
-    // Adres niet gevonden
-    $straat = '';
-    $woonplaats = '';
+$straat = '';
+$woonplaats = '';
+if (!empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
+    $adres = zoekAdres($_POST['postcode'], $_POST['huisnummer'], $pdo);
+    if ($adres) {
+        // Vul straat en woonplaats automatisch in
+        $straat = $adres['straat'];
+        $woonplaats = $adres['plaats'];
+    }
 }
 ?>
 <!DOCTYPE html>
