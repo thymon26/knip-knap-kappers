@@ -1,4 +1,5 @@
 <?php
+require 'db.php';
 
 // Laad PHPMailer
 require 'phpmailer/src/PHPMailer.php';
@@ -82,6 +83,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+// Zoek adres in database
+function zoekAdres($postcode, $huisnummer, $pdo) {
+    $postcode = strtoupper(str_replace(' ', '', $postcode));
+    $stmt = $pdo->prepare("SELECT straat, plaats FROM adressen WHERE postcode = ? AND huisnummer = ?");
+    $stmt->execute([$postcode, $huisnummer]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// Gebruik:
+$adres = zoekAdres($_POST['postcode'], $_POST['huisnummer'], $pdo);
+if ($adres) {
+    // Vul straat en woonplaats automatisch in
+    $straat = $adres['straat'];
+    $woonplaats = $adres['plaats'];
+} else {
+    // Adres niet gevonden
+    $straat = '';
+    $woonplaats = '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -89,6 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Afrekenen - Knip Knap Kappers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </head>
 <body>
 <div class="container mt-5">
@@ -127,11 +149,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="mb-3">
                 <label for="straat" class="form-label">Straat</label>
-                <input type="text" class="form-control" id="straat" name="straat" readonly required>
+                <input type="text" class="form-control" id="straat" name="straat" value="<?= htmlspecialchars($straat) ?>" readonly required>
             </div>
             <div class="mb-3">
                 <label for="woonplaats" class="form-label">Woonplaats</label>
-                <input type="text" class="form-control" id="woonplaats" name="woonplaats" readonly required>
+                <input type="text" class="form-control" id="woonplaats" name="woonplaats" value="<?= htmlspecialchars($woonplaats) ?>" readonly required>
             </div>
             <button type="submit" class="btn btn-success btn-lg">Bestelling plaatsen</button>
         </form>
@@ -158,6 +180,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
     <?php endif; ?>
 </div>
+<script>
+let autocomplete;
+function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('autocomplete'),
+        { types: ['address'], componentRestrictions: { country: 'nl' } }
+    );
+    autocomplete.setFields(['address_component']);
+    autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function fillInAddress() {
+    const place = autocomplete.getPlace();
+    let straat = '', huisnummer = '', toevoeging = '', postcode = '', woonplaats = '';
+    place.address_components.forEach(function(component) {
+        const types = component.types;
+        if (types.includes('route')) straat = component.long_name;
+        if (types.includes('street_number')) huisnummer = component.long_name;
+        if (types.includes('subpremise')) toevoeging = component.long_name;
+        if (types.includes('postal_code')) postcode = component.long_name;
+        if (types.includes('locality')) woonplaats = component.long_name;
+    });
+    document.getElementById('straat').value = straat;
+    document.getElementById('huisnummer').value = huisnummer;
+    document.getElementById('toevoeging').value = toevoeging;
+    document.getElementById('postcode').value = postcode;
+    document.getElementById('woonplaats').value = woonplaats;
+}
+
+// Google Places init
+window.initAutocomplete = initAutocomplete;
+</script>
 <script>
 function fetchAdres() {
     const postcode = document.getElementById('postcode').value.replace(/\s+/g, '').toUpperCase();
