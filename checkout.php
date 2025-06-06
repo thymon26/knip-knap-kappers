@@ -4,6 +4,17 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 require 'db.php';
 
+// Zoek adres in database (maar één keer definiëren!)
+function zoekAdres($postcode, $huisnummer, $pdo) {
+    $postcode = strtoupper(str_replace(' ', '', $postcode));
+    if (strlen($postcode) === 6) {
+        $postcode = substr($postcode, 0, 4) . ' ' . substr($postcode, 4, 2);
+    }
+    $stmt = $pdo->prepare("SELECT straat, plaats FROM adressen WHERE postcode = ? AND huisnummer = ?");
+    $stmt->execute([$postcode, $huisnummer]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 // AJAX-adreslookup
 if (
     isset($_POST['ajax']) && $_POST['ajax'] == '1'
@@ -11,15 +22,6 @@ if (
 ) {
     header('Content-Type: application/json');
     try {
-        function zoekAdres($postcode, $huisnummer, $pdo) {
-            $postcode = strtoupper(str_replace(' ', '', $postcode));
-            if (strlen($postcode) === 6) {
-                $postcode = substr($postcode, 0, 4) . ' ' . substr($postcode, 4, 2);
-            }
-            $stmt = $pdo->prepare("SELECT straat, plaats FROM adressen WHERE postcode = ? AND huisnummer = ?");
-            $stmt->execute([$postcode, $huisnummer]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
         $adres = zoekAdres($_POST['postcode'], $_POST['huisnummer'], $pdo);
         if ($adres) {
             echo json_encode(['straat' => $adres['straat'], 'woonplaats' => $adres['plaats']]);
