@@ -159,21 +159,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 </div>
 <script>
-document.getElementById('postcode').addEventListener('blur', fetchAdres);
-document.getElementById('huisnummer').addEventListener('blur', fetchAdres);
-
 function fetchAdres() {
     const postcode = document.getElementById('postcode').value.replace(/\s+/g, '').toUpperCase();
     const huisnummer = document.getElementById('huisnummer').value;
     if (postcode.length === 6 && huisnummer) {
-        fetch('https://api.postcodeapi.nu/v3/lookup/' + postcode + '/' + huisnummer, {
-            headers: { 'X-Api-Key': 'Y9kspdBeiezLNtPVSiUC1JDS1iO45iq2dJZqhkb2' }
-        })
+        fetch('https://api.openadres.nl/lookup?postcode=' + postcode + '&huisnummer=' + huisnummer)
         .then(res => res.json())
         .then(data => {
-            if (data && data.street && data.city) {
-                document.getElementById('straat').value = data.street;
-                document.getElementById('woonplaats').value = data.city;
+            if (data && data.straat && data.plaats) {
+                document.getElementById('straat').value = data.straat;
+                document.getElementById('woonplaats').value = data.plaats;
             } else {
                 document.getElementById('straat').value = '';
                 document.getElementById('woonplaats').value = '';
@@ -187,6 +182,8 @@ function fetchAdres() {
         });
     }
 }
+document.getElementById('postcode').addEventListener('blur', fetchAdres);
+document.getElementById('huisnummer').addEventListener('blur', fetchAdres);
 </script>
 </body>
 </html>
