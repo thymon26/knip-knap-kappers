@@ -66,13 +66,21 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     .add-to-cart-btn {
         position: absolute;
-        left: 50%;
-        bottom: 24px;
-        transform: translateX(-50%);
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(80,80,80,0.7); /* grijs en doorzichtig */
+        color: #fff;
+        border: none;
+        border-radius: 0 0 0.5rem 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s;
-        z-index: 3;
+        z-index: 10;
     }
     .card.h-100:hover .add-to-cart-btn {
         opacity: 1;
