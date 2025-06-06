@@ -67,11 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <td><?= htmlspecialchars($item['naam']) ?></td>
                         <td>€<?= number_format($prijs, 2, ',', '.') ?></td>
                         <td>
-                            <div class="input-group">
+                            <form method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($item['id']) ?>">
-                                <input type="number" name="update_qty" value="<?= (int)$item['qty'] ?>" min="1" class="form-control form-control-sm" style="width:60px;">
-                                <button type="submit" class="btn btn-outline-primary btn-sm">Bijwerken</button>
-                            </div>
+                                <input type="number" name="update_qty" value="<?= (int)$item['qty'] ?>" min="1" class="form-control form-control-sm d-inline" style="width:60px;">
+                            </form>
                         </td>
                         <td>€<?= number_format($subtotaal, 2, ',', '.') ?></td>
                         <td>
