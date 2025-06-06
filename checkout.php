@@ -115,7 +115,6 @@ if (!empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
     <meta charset="UTF-8">
     <title>Afrekenen - Knip Knap Kappers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </head>
 <body>
 <div class="container mt-5">
@@ -185,64 +184,5 @@ if (!empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
         <?php endif; ?>
     <?php endif; ?>
 </div>
-<script>
-let autocomplete;
-function initAutocomplete() {
-    autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'),
-        { types: ['address'], componentRestrictions: { country: 'nl' } }
-    );
-    autocomplete.setFields(['address_component']);
-    autocomplete.addListener('place_changed', fillInAddress);
-}
-
-function fillInAddress() {
-    const place = autocomplete.getPlace();
-    let straat = '', huisnummer = '', toevoeging = '', postcode = '', woonplaats = '';
-    place.address_components.forEach(function(component) {
-        const types = component.types;
-        if (types.includes('route')) straat = component.long_name;
-        if (types.includes('street_number')) huisnummer = component.long_name;
-        if (types.includes('subpremise')) toevoeging = component.long_name;
-        if (types.includes('postal_code')) postcode = component.long_name;
-        if (types.includes('locality')) woonplaats = component.long_name;
-    });
-    document.getElementById('straat').value = straat;
-    document.getElementById('huisnummer').value = huisnummer;
-    document.getElementById('toevoeging').value = toevoeging;
-    document.getElementById('postcode').value = postcode;
-    document.getElementById('woonplaats').value = woonplaats;
-}
-
-// Google Places init
-window.initAutocomplete = initAutocomplete;
-</script>
-<script>
-function fetchAdres() {
-    const postcode = document.getElementById('postcode').value.replace(/\s+/g, '').toUpperCase();
-    const huisnummer = document.getElementById('huisnummer').value;
-    if (postcode.length === 6 && huisnummer) {
-        fetch('https://api.openadres.nl/lookup?postcode=' + postcode + '&huisnummer=' + huisnummer)
-        .then(res => res.json())
-        .then(data => {
-            if (data && data.straat && data.plaats) {
-                document.getElementById('straat').value = data.straat;
-                document.getElementById('woonplaats').value = data.plaats;
-            } else {
-                document.getElementById('straat').value = '';
-                document.getElementById('woonplaats').value = '';
-                alert('Adres niet gevonden. Controleer postcode en huisnummer.');
-            }
-        })
-        .catch(() => {
-            document.getElementById('straat').value = '';
-            document.getElementById('woonplaats').value = '';
-            alert('Adres niet gevonden. Controleer postcode en huisnummer.');
-        });
-    }
-}
-document.getElementById('postcode').addEventListener('blur', fetchAdres);
-document.getElementById('huisnummer').addEventListener('blur', fetchAdres);
-</script>
 </body>
 </html>
