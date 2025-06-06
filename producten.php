@@ -364,7 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
     </nav>
   </header>
 
-<body>
 <div class="container">
     <h1 class="mb-4">Onze Producten</h1>
     <div class="row">
