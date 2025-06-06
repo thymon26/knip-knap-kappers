@@ -113,7 +113,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <strong>€<?= number_format($product['prijs'], 2, ',', '.') ?></strong>
                 <?php endif; ?>
             </div>
-            <button class="btn btn-primary add-to-cart-btn">
+            <button class="btn  add-to-cart-btn">
                 <i class="bi bi-cart-plus"></i> Add to cart
             </button>
         </div>
