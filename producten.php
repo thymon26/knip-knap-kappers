@@ -362,8 +362,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <li><button class="reserveren" onclick="location.href='/Pages/Reserveren.html'">Reserveren</button></li>
       </ul>
     </nav>
-    <br><br><br><br><br><br><br><br>
   </header>
+    <br><br><br><br><br><br><br><br>
 
 <div class="container">
     <h1 class="mb-4">Onze Producten</h1>
