@@ -96,5 +96,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     <?php endif; ?>
 </div>
+<script>
+document.querySelectorAll('input[name="update_qty"]').forEach(function(input) {
+    input.addEventListener('change', function() {
+        // Zoek het dichtstbijzijnde formulier en submit
+        input.closest('form').submit();
+    });
+});
+</script>
 </body>
 </html>
