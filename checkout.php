@@ -1,4 +1,5 @@
 <?php
+
 // Laad PHPMailer
 require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
@@ -19,11 +20,17 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $naam = trim($_POST['naam'] ?? '');
     $email = trim($_POST['email'] ?? '');
-    $adres = trim($_POST['adres'] ?? '');
+    $straat = trim($_POST['straat'] ?? '');
+    $woonplaats = trim($_POST['woonplaats'] ?? '');
+    $postcode = trim($_POST['postcode'] ?? '');
+    $huisnummer = trim($_POST['huisnummer'] ?? '');
+    $toevoeging = trim($_POST['toevoeging'] ?? '');
 
-    if (!$naam || !$email || !$adres || empty($cart)) {
+    if (!$naam || !$email || !$straat || !$woonplaats || !$postcode || !$huisnummer || empty($cart)) {
         $error = "Vul alle velden in en zorg dat je winkelwagen niet leeg is.";
     } else {
+        $adres = "$straat $huisnummer $toevoeging, $postcode $woonplaats";
+
         // Maak order-overzicht
         $orderHtml = "<h2>Bestelbevestiging</h2>";
         $orderHtml .= "<p>Bedankt voor je bestelling, $naam!</p>";
@@ -95,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error): ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
-        <form method="post" class="mb-4">
+        <form method="post" class="mb-4" id="checkout-form">
             <div class="mb-3">
                 <label for="naam" class="form-label">Naam</label>
                 <input type="text" class="form-control" id="naam" name="naam" required>
@@ -104,9 +111,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="email" class="form-label">E-mailadres</label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="postcode" class="form-label">Postcode</label>
+                    <input type="text" class="form-control" id="postcode" name="postcode" maxlength="7" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="huisnummer" class="form-label">Huisnummer</label>
+                    <input type="text" class="form-control" id="huisnummer" name="huisnummer" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="toevoeging" class="form-label">Toevoeging</label>
+                    <input type="text" class="form-control" id="toevoeging" name="toevoeging">
+                </div>
+            </div>
             <div class="mb-3">
-                <label for="adres" class="form-label">Adres</label>
-                <textarea class="form-control" id="adres" name="adres" rows="2" required></textarea>
+                <label for="straat" class="form-label">Straat</label>
+                <input type="text" class="form-control" id="straat" name="straat" readonly required>
+            </div>
+            <div class="mb-3">
+                <label for="woonplaats" class="form-label">Woonplaats</label>
+                <input type="text" class="form-control" id="woonplaats" name="woonplaats" readonly required>
             </div>
             <button type="submit" class="btn btn-success btn-lg">Bestelling plaatsen</button>
         </form>
@@ -133,5 +158,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
     <?php endif; ?>
 </div>
+<script>
+document.getElementById('postcode').addEventListener('blur', fetchAdres);
+document.getElementById('huisnummer').addEventListener('blur', fetchAdres);
+
+function fetchAdres() {
+    const postcode = document.getElementById('postcode').value.replace(/\s+/g, '').toUpperCase();
+    const huisnummer = document.getElementById('huisnummer').value;
+    if (postcode.length === 6 && huisnummer) {
+        fetch('https://api.postcodeapi.nu/v3/lookup/' + postcode + '/' + huisnummer, {
+            headers: { 'X-Api-Key': 'Y9kspdBeiezLNtPVSiUC1JDS1iO45iq2dJZqhkb2' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data && data.street && data.city) {
+                document.getElementById('straat').value = data.street;
+                document.getElementById('woonplaats').value = data.city;
+            } else {
+                document.getElementById('straat').value = '';
+                document.getElementById('woonplaats').value = '';
+                alert('Adres niet gevonden. Controleer postcode en huisnummer.');
+            }
+        })
+        .catch(() => {
+            document.getElementById('straat').value = '';
+            document.getElementById('woonplaats').value = '';
+            alert('Adres niet gevonden. Controleer postcode en huisnummer.');
+        });
+    }
+}
+</script>
 </body>
 </html>
