@@ -269,7 +269,6 @@ body {
 
 .content {
   padding: 4rem;
-}
     </style>
 
     <script>
@@ -359,8 +358,14 @@ document.addEventListener('DOMContentLoaded', () => {
         <li><a href="#">Producten</a></li>
         <li><a href="#">Prijzen</a></li>
         <li><a href="#">Contact</a></li>
-        <li><button class="reserveren" onclick="location.href='/Pages/Reserveren.html'">Reserveren</button></li>
-      </ul>
+        <li>
+      <button class="cart-btn" id="cartBtn" style="background: none; border: none; position: relative; margin-right: 10px;">
+        <i class="bi bi-cart" style="font-size: 1.7rem;"></i>
+        <span id="cartCount" style="position: absolute; top: -6px; right: -8px; background: #bfa046; color: #fff; border-radius: 50%; font-size: 0.85rem; padding: 2px 7px; min-width: 22px; text-align: center;">0</span>
+      </button>
+      <button class="reserveren" onclick="location.href='/Pages/Reserveren.html'">Reserveren</button>
+    </li>
+</ul>
     </nav>
   </header>
     <br><br><br><br><br><br><br><br>
@@ -408,6 +413,14 @@ function getCartCookie() {
     const match = document.cookie.match(/(?:^|; )cart=([^;]*)/);
     return match ? JSON.parse(decodeURIComponent(match[1])) : [];
 }
+
+function updateCartCount() {
+    const cart = getCartCookie();
+    let count = 0;
+    cart.forEach(item => count += item.qty || 1);
+    document.getElementById('cartCount').textContent = count;
+}
+updateCartCount();
 
 document.querySelectorAll('.add-to-cart-btn').forEach((btn, idx) => {
     btn.addEventListener('click', function(e) {
@@ -465,8 +478,15 @@ document.querySelectorAll('.add-to-cart-btn').forEach((btn, idx) => {
             });
         }
         setCartCookie(cart);
+        updateCartCount();
     });
 });
 </script>
+<style>
+.cart-btn:hover i {
+  color: #bfa046;
+  transition: color 0.2s;
+}
+</style>
 </body>
 </html>
