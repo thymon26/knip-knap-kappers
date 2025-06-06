@@ -153,11 +153,11 @@ if (!empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
             </div>
             <div class="mb-3">
                 <label for="straat" class="form-label">Straat</label>
-                <input type="text" class="form-control" id="straat" name="straat" value="<?= htmlspecialchars($straat) ?>" readonly required>
+                <input type="text" class="form-control" id="straat" name="straat" value="<?= htmlspecialchars($straat) ?>" required>
             </div>
             <div class="mb-3">
                 <label for="woonplaats" class="form-label">Woonplaats</label>
-                <input type="text" class="form-control" id="woonplaats" name="woonplaats" value="<?= htmlspecialchars($woonplaats) ?>" readonly required>
+                <input type="text" class="form-control" id="woonplaats" name="woonplaats" value="<?= htmlspecialchars($woonplaats) ?>" required>
             </div>
             <button type="submit" class="btn btn-success btn-lg">Bestelling plaatsen</button>
         </form>
@@ -184,5 +184,34 @@ if (!empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
         <?php endif; ?>
     <?php endif; ?>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function fetchAdres() {
+        const postcode = document.getElementById('postcode').value;
+        const huisnummer = document.getElementById('huisnummer').value;
+        if (postcode.length >= 6 && huisnummer.length > 0) {
+            const formData = new FormData();
+            formData.append('postcode', postcode);
+            formData.append('huisnummer', huisnummer);
+            fetch('zoek_adres.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.straat) {
+                    document.getElementById('straat').value = data.straat;
+                }
+                if (data.woonplaats) {
+                    document.getElementById('woonplaats').value = data.woonplaats;
+                }
+            });
+        }
+    }
+
+    document.getElementById('postcode').addEventListener('blur', fetchAdres);
+    document.getElementById('huisnummer').addEventListener('blur', fetchAdres);
+});
+</script>
 </body>
 </html>
