@@ -115,19 +115,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
-
-// Gebruik:
+// Alleen invullen bij GET (dus niet bij POST)
 $straat = '';
 $woonplaats = '';
-if (!empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
     $adres = zoekAdres($_POST['postcode'], $_POST['huisnummer'], $pdo);
     if ($adres) {
-        // Vul straat en woonplaats automatisch in
         $straat = $adres['straat'];
         $woonplaats = $adres['plaats'];
     }
 }
+// Bij POST gebruik je gewoon de door de gebruiker ingevulde waarden (zie boven in je code)
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -165,10 +163,6 @@ if (!empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
                 <div class="col-md-4">
                     <label for="huisnummer" class="form-label">Huisnummer</label>
                     <input type="text" class="form-control" id="huisnummer" name="huisnummer" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="toevoeging" class="form-label">Toevoeging</label>
-                    <input type="text" class="form-control" id="toevoeging" name="toevoeging">
                 </div>
             </div>
             <div class="mb-3">
