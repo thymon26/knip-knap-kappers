@@ -210,32 +210,39 @@ if (!empty($_POST['postcode']) && !empty($_POST['huisnummer'])) {
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const postcodeInput = document.getElementById('postcode');
+    const huisnummerInput = document.getElementById('huisnummer');
+    const straatInput = document.getElementById('straat');
+    const woonplaatsInput = document.getElementById('woonplaats');
+
     function fetchAdres() {
-        const postcode = document.getElementById('postcode').value;
-        const huisnummer = document.getElementById('huisnummer').value;
+        const postcode = postcodeInput.value;
+        const huisnummer = huisnummerInput.value;
         if (postcode.length >= 6 && huisnummer.length > 0) {
             const formData = new FormData();
             formData.append('ajax', '1');
             formData.append('postcode', postcode);
             formData.append('huisnummer', huisnummer);
-            fetch('', { // fetch naar dezelfde pagina
+            fetch('', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                if (data.straat !== undefined) {
-                    document.getElementById('straat').value = data.straat;
+                if (data.straat !== undefined && data.straat !== '') {
+                    straatInput.value = data.straat;
                 }
-                if (data.woonplaats !== undefined) {
-                    document.getElementById('woonplaats').value = data.woonplaats;
+                if (data.woonplaats !== undefined && data.woonplaats !== '') {
+                    woonplaatsInput.value = data.woonplaats;
                 }
             });
         }
     }
 
-    document.getElementById('postcode').addEventListener('input', fetchAdres);
-    document.getElementById('huisnummer').addEventListener('input', fetchAdres);
+    if (postcodeInput && huisnummerInput) {
+        postcodeInput.addEventListener('input', fetchAdres);
+        huisnummerInput.addEventListener('input', fetchAdres);
+    }
 });
 </script>
 </body>
