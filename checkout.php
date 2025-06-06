@@ -1,6 +1,30 @@
 <?php
 require 'db.php';
 
+// AJAX-adreslookup
+if (
+    isset($_POST['ajax']) && $_POST['ajax'] == '1'
+    && isset($_POST['postcode']) && isset($_POST['huisnummer'])
+) {
+    function zoekAdres($postcode, $huisnummer, $pdo) {
+        $postcode = strtoupper(str_replace(' ', '', $postcode));
+        if (strlen($postcode) === 6) {
+            $postcode = substr($postcode, 0, 4) . ' ' . substr($postcode, 4, 2);
+        }
+        $stmt = $pdo->prepare("SELECT straat, plaats FROM adressen WHERE postcode = ? AND huisnummer = ?");
+        $stmt->execute([$postcode, $huisnummer]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    $adres = zoekAdres($_POST['postcode'], $_POST['huisnummer'], $pdo);
+    header('Content-Type: application/json');
+    if ($adres) {
+        echo json_encode(['straat' => $adres['straat'], 'woonplaats' => $adres['plaats']]);
+    } else {
+        echo json_encode(['straat' => '', 'woonplaats' => '']);
+    }
+    exit;
+}
+
 // Laad PHPMailer
 require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
@@ -191,26 +215,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const huisnummer = document.getElementById('huisnummer').value;
         if (postcode.length >= 6 && huisnummer.length > 0) {
             const formData = new FormData();
+            formData.append('ajax', '1');
             formData.append('postcode', postcode);
             formData.append('huisnummer', huisnummer);
-            fetch('zoek_adres.php', {
+            fetch('', { // fetch naar dezelfde pagina
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                if (data.straat) {
+                if (data.straat !== undefined) {
                     document.getElementById('straat').value = data.straat;
                 }
-                if (data.woonplaats) {
+                if (data.woonplaats !== undefined) {
                     document.getElementById('woonplaats').value = data.woonplaats;
                 }
             });
         }
     }
 
-    document.getElementById('postcode').addEventListener('blur', fetchAdres);
-    document.getElementById('huisnummer').addEventListener('blur', fetchAdres);
+    document.getElementById('postcode').addEventListener('input', fetchAdres);
+    document.getElementById('huisnummer').addEventListener('input', fetchAdres);
 });
 </script>
 </body>
