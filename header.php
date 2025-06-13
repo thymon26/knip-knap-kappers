@@ -3,17 +3,17 @@
         <nav class="nav">
         <img src="/Assets/logo.png" alt="Logo" class="logo"/>
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Producten</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="producten.php">Producten</a></li>
             <li><a href="#">Prijzen</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="contact.php">Contact</a></li>
             <li><a href="cart.php">
             <button class="cart-btn" id="cartBtn" style="background: none; border: none; position: relative; margin-right: 10px;">
                 <i class="bi bi-cart" style="font-size: 1.7rem;"></i>
                 <span id="cartCount" style="position: absolute; top: -6px; right: -8px; background: #bfa046; color: #fff; border-radius: 50%; font-size: 0.85rem; padding: 2px 7px; min-width: 22px; text-align: center;">0</span>
             </button>
             </a>
-            <button class="reserveren" onclick="location.href='/Pages/Reserveren.html'">Reserveren</button>
+            <button class="reserveren" onclick="location.href='reserveren.php'">Reserveren</button>
             </li>
         </ul>
         </nav>
