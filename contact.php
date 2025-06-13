@@ -60,6 +60,10 @@
     </style>
 </head>
 <body>
+    <?php
+    // Include the header file
+    include 'header.php';
+    ?>
     <div class="container">
         <h1>Contact opnemen met Kapperszaak Aventus Apeldoorn</h1>
         <p>Heb je vragen of wil je een afspraak maken? Vul het formulier in en wij nemen zo snel mogelijk contact met je op!</p>
