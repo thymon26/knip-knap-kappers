@@ -68,20 +68,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $orderHtml .= "<p>Bedankt voor je bestelling, $naam!</p>";
         $orderHtml .= "<p><strong>Adres:</strong> " . htmlspecialchars($adres) . "</p>";
         $orderHtml .= "<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;'>";
-        $orderHtml .= "<tr><th>Product</th><th>Aantal</th><th>Prijs</th><th>Totaal</th></tr>";
+        $orderHtml .= "<tr><th>Afbeelding</th><th>Product</th><th>Aantal</th><th>Prijs</th><th>Totaal</th></tr>";
         $totaal = 0;
         foreach ($cart as $item) {
             $prijs = floatval(str_replace([',', '€'], ['.', ''], $item['prijs']));
             $subtotaal = $prijs * $item['qty'];
             $totaal += $subtotaal;
+            $afbeelding = isset($item['afbeelding']) ? 'https://barber.badeendensoep.nl' . htmlspecialchars($item['afbeelding']) : '';
+            $imgHtml = $afbeelding ? "<img src=\"$afbeelding\" alt=\"".htmlspecialchars($item['naam'])."\" style=\"max-width:60px;max-height:60px;\">" : '';
             $orderHtml .= "<tr>";
+            $orderHtml .= "<td style=\"text-align:center;\">$imgHtml</td>";
             $orderHtml .= "<td>" . htmlspecialchars($item['naam']) . "</td>";
             $orderHtml .= "<td>" . (int)$item['qty'] . "</td>";
             $orderHtml .= "<td>€" . number_format($prijs, 2, ',', '.') . "</td>";
             $orderHtml .= "<td>€" . number_format($subtotaal, 2, ',', '.') . "</td>";
             $orderHtml .= "</tr>";
         }
-        $orderHtml .= "<tr><th colspan='3' style='text-align:right;'>Totaal</th><th>€" . number_format($totaal, 2, ',', '.') . "</th></tr>";
+        $orderHtml .= "<tr><th colspan='4' style='text-align:right;'>Totaal</th><th>€" . number_format($totaal, 2, ',', '.') . "</th></tr>";
         $orderHtml .= "</table>";
 
         // Verstuur mail
