@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container mt-5">
     <h1 class="mb-4">Winkelwagen</h1>
     <?php if (empty($cart)): ?>
-        <div class="alert alert-info">Je winkelwagen is leeg.</div>
+        <div class="alert alert-info">Je winkelwagen is leeg. Klik <a href="producten.php">hier</a> om terug te gaan.</div>
     <?php else: ?>
         <form method="post">
         <table class="table align-middle">
