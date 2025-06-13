@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $prijs = floatval(str_replace([',', '€'], ['.', ''], $item['prijs']));
             $subtotaal = $prijs * $item['qty'];
             $totaal += $subtotaal;
-            $afbeelding = isset($item['afbeelding']) ? 'https://barber.badeendensoep.nl' . htmlspecialchars($item['afbeelding']) : '';
+            $afbeelding = isset($item['afbeelding']) ? '' . htmlspecialchars($item['afbeelding']) : '';
             $imgHtml = $afbeelding ? "<img src=\"$afbeelding\" alt=\"".htmlspecialchars($item['naam'])."\" style=\"max-width:60px;max-height:60px;\">" : '';
             $orderHtml .= "<tr>";
             $orderHtml .= "<td style=\"text-align:center;\">$imgHtml</td>";
