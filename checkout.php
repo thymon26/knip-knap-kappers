@@ -112,6 +112,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             $error = "Er is iets misgegaan met het versturen van de bevestiging: {$mail->ErrorInfo}";
         }
+
+        // Sla bestelling op in de database
+        try {
+            $pdo->beginTransaction();
+            $stmt = $pdo->prepare("INSERT INTO orders (naam, email, straat, huisnummer, toevoeging, postcode, woonplaats, totaal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([
+                $naam,
+                $email,
+                $straat,
+                $huisnummer,
+                $toevoeging,
+                $postcode,
+                $woonplaats,
+                $totaal
+            ]);
+            $orderId = $pdo->lastInsertId();
+
+            $stmtItem = $pdo->prepare("INSERT INTO order_items (order_id, product_naam, aantal, prijs) VALUES (?, ?, ?, ?)");
+            foreach ($cart as $item) {
+                $prijs = floatval(str_replace([',', '€'], ['.', ''], $item['prijs']));
+                $stmtItem->execute([
+                    $orderId,
+                    $item['naam'],
+                    $item['qty'],
+                    $prijs
+                ]);
+            }
+            $pdo->commit();
+        } catch (Throwable $e) {
+            $pdo->rollBack();
+            $error = "Fout bij opslaan bestelling: " . $e->getMessage();
+        }
     }
 }
 
