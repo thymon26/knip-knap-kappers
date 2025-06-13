@@ -3,6 +3,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
+    <title>Contact | Kapperszaak</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kapperszaak Aventus Apeldoorn - Contact</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -57,7 +58,6 @@
         </div>
     </div>
     <script>
-        // Simpele form handler (stuurt niet echt een mail)
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             document.getElementById('formMessage').innerHTML = "<div class='alert alert-success'>Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.</div>";
