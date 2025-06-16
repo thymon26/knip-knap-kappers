@@ -58,8 +58,16 @@
     width: 90%;
     max-width: 350px;
   }
+
 }
-.parallax-container {
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 200vh; /* allows scrolling */
+      overflow-x: hidden;
+    }
+
+    .parallax-container {
       position: relative;
       height: 100vh;
       overflow: hidden;
@@ -82,24 +90,32 @@
       position: relative;
       width: 100%;
       height: 100vh;
-      background: url('ideetje.jpg') no-repeat center center;
+      background: url('assets/product/ideetje.jpg') no-repeat center center;
       background-size: contain;
       z-index: 2;
     }
+
 </style>
 </head>
 <body>
 <?php
 // Include header file 
 include 'header.php';
+
 ?>
   <main>
-    <div class="parallax-container">
-    <div class="parallax-background"></div>
-    <div class="parallax-foreground"></div>
-
+    <section class="hero">
+      <div class="parallax-container">
+         <div class="parallax-container">
+         <div class="parallax-background">
+         <div class="parallax-foreground">
       <h1>Welkom Bij KnipKnap</h1>
-    </div>
+         </div>
+         </div>
+         </div>
+         </div>
+    </section>
+
     <section class="content">
       <p>Kom gezellig bij ons knippen!</p>
       <div style="height: 1000px;"></div>
