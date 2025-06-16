@@ -67,7 +67,7 @@
 include 'header.php';
 ?>
   <main>
-    <section class="hero">
+    <section class="hero",class="layer-main">
       <h1>Welkom Bij KnipKnap</h1>
     </section>
     <section class="content">
