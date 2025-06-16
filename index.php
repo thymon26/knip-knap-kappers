@@ -73,7 +73,7 @@
       width: 100%;
       height: 120%;
       transform: translateZ(-1px) scale(2);
-      background: url('ideetje.avif') no-repeat center center;
+      background: url('assets/product/ideetje.avif') no-repeat center center;
       background-size: cover;
       z-index: 1;
     }
