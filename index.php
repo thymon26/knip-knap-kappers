@@ -8,6 +8,62 @@
 
 <!-- Services Boxes CSS -->
 <style>
+     html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: sans-serif;
+      background: #fff;
+    }
+
+    .parallax-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .parallax-background, .parallax-foreground {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    .parallax-background {
+      background-image: url('assets/product/ideetje.avif');
+      z-index: 1;
+    }
+
+    .parallax-foreground {
+      background-image: url('assets/product/ideetje.jpg');
+      background-size: contain;
+      z-index: 2;
+    }
+
+    .parallax-text {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding-top: 40vh;
+      color: white;
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 6px #000;
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 10;
+      background: #fff;
+      padding: 4rem 2rem;
+    }
 .services-container {
   display: flex;
   flex-wrap: wrap;
