@@ -29,12 +29,12 @@
     }
 
     .parallax-background {
-      background-image: url('assets/product/ideetje.avif');
+      background-image: url('assets/product/ideetje\ -\ Copy.avif');
       z-index: 1;
     }
 
     .parallax-foreground {
-      background-image: url('assets/product/ideetje.jpg');
+      background-image: url('assets/product/ideetje2\ -\ Copy.jpg');
       background-size: contain;
       z-index: 2;
     }
@@ -108,10 +108,6 @@ include 'header.php';
     <div class="parallax-background" id="bg"></div>
     <div class="parallax-foreground" id="fg"></div>
       </section>
-
-    <section class="hero">
-      <h1>Welkom Bij KnipKnap</h1>
-    </section>
     <section class="content">
       <p>Kom gezellig bij ons knippen!</p>
       <div style="height: 1000px;"></div>
