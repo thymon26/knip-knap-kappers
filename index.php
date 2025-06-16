@@ -14,29 +14,9 @@
       height: 100vh;
       overflow: hidden;
     }
-
-    .parallax-background, .parallax-foreground {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      will-change: transform;
-      pointer-events: none;
-    }
-
     .parallax-background {
       background-image: url('assets/product/ideetje\ -\ Copy.avif');
       z-index: 1;
-    }
-
-    .parallax-foreground {
-      background-image: url('assets/product/ideetje2\ -\ Copy.jpg');
-      background-size: contain;
-      z-index: 2;
     }
 
     .main-content {
