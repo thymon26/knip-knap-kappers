@@ -17,61 +17,13 @@ body {
   background-color: #FEDCC8;
 }
 
-.parallax {
-  perspective: 200px;
-  height: 100vh;
-  overflow-x: hidden;
-  /* REMOVE THIS LINE 👇 */
-  /* overflow-y: auto; */
-  position: absolute;
-  top: 0;
-  left: 50%;
-  right: 0;
-  bottom: 0;
-  margin-left: -1500px;
-  pointer-events: none; /* optional: prevents blocking clicks */
-}
-.parallax__layer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
+
 .parallax__layer img {
   display: block;
   position: absolute;
   bottom: 0;
 }
 
-
-.parallax__layer__0 {
-  transform: translateZ(-300px) scale(4);
-}
-
-.parallax__layer__1 {
-  transform: translateZ(-250px) scale(3.5);
-}
-
-.parallax__layer__2 {
-  transform: translateZ(-200px) scale(3);
-}
-
-.parallax__layer__3 {
-  transform: translateZ(-150px) scale(2.5);
-}
-
-.parallax__layer__4 {
-  transform: translateZ(-100px) scale(2);
-}
-
-.parallax__layer__5 {
-  transform: translateZ(-50px) scale(1.5);
-}
-
-.parallax__layer__6 {
-  transform: translateZ(0px) scale(1);
-}
 
 .services-container {
   display: flex;
