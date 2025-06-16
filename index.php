@@ -8,9 +8,10 @@
 
 <!-- Services Boxes CSS -->
 <style>
-html,
-body {
-  background-color: #FEDCC8;
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .parallax {
@@ -18,12 +19,11 @@ body {
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  position: absolute;
+  position: fixed; /* Sticky effect without absolute offsetting */
   top: 0;
-  left: 50%;
-  right: 0;
-  bottom: 0;
-  margin-left: -1500px;
+  left: 0;
+  width: 100%;
+  z-index: 0;
 }
 
 .parallax__layer {
@@ -34,9 +34,8 @@ body {
   left: 0;
 }
 .parallax__layer img {
-  display: block;
-  position: absolute;
-  bottom: 0;
+  max-width: 100vw;
+  height: auto;
 }
 
 .parallax__cover {
