@@ -44,16 +44,6 @@ body {
   bottom: 0;
 }
 
-.parallax__cover {
-  background: #2D112B;
-  display: block;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  height: 2000px;
-  z-index: 2;
-}
 
 .parallax__layer__0 {
   transform: translateZ(-300px) scale(4);
