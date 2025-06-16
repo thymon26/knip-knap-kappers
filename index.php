@@ -8,14 +8,6 @@
 
 <!-- Services Boxes CSS -->
 <style>
-     html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      font-family: sans-serif;
-      background: #fff;
-    }
-
     .parallax-section {
       position: relative;
       width: 100%;
@@ -45,17 +37,6 @@
       background-image: url('assets/product/ideetje.jpg');
       background-size: contain;
       z-index: 2;
-    }
-
-    .parallax-text {
-      position: relative;
-      z-index: 3;
-      text-align: center;
-      padding-top: 40vh;
-      color: white;
-      font-size: 3rem;
-      font-weight: bold;
-      text-shadow: 2px 2px 6px #000;
     }
 
     .main-content {
