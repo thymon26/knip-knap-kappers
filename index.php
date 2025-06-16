@@ -8,22 +8,19 @@
 
 <!-- Services Boxes CSS -->
 <style>
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  background-color: #FEDCC8;
-}
-
-
-.parallax__layer img {
-  display: block;
-  position: absolute;
-  bottom: 0;
-}
-
+  .banner{
+      background-image: url("assets/product/ideetje2\ -\ Copy.jpg");
+      perspective: 100px;
+      height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      right: 0;
+      bottom: 0;
+      margin-left: -1500px;
+    }
 
 .services-container {
   display: flex;
@@ -83,31 +80,8 @@ body {
 // Include header file 
 include 'header.php';
 ?>
-<div class="parallax">
-    <div class="parallax__layer parallax__layer__0">
-        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_0.png?raw=true" />
-    </div>
-    <div class="parallax__layer parallax__layer__1">
-        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_1.png?raw=true" />
-    </div>
-    <div class="parallax__layer parallax__layer__2">
-        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_2.png?raw=true" />
-    </div>
-    <div class="parallax__layer parallax__layer__3">
-        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_3.png?raw=true" />
-    </div>
-    <div class="parallax__layer parallax__layer__4">
-        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_4.png?raw=true" />
-    </div>
-    <div class="parallax__layer parallax__layer__5">
-        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_5.png?raw=true" />
-    </div>
-    <div class="parallax__layer parallax__layer__6">
-        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_6.png?raw=true" />
-    </div>
-    <div class="parallax__cover"></div>
-</div>
   <main>
+    <div class="banner"></div>
     <section class="hero">
       <h1>Welkom Bij KnipKnap</h1>
     </section>
