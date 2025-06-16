@@ -59,6 +59,33 @@
     max-width: 350px;
   }
 }
+.parallax-container {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      perspective: 1px;
+    }
+
+    .parallax-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      transform: translateZ(-1px) scale(2);
+      background: url('ideetje.avif') no-repeat center center;
+      background-size: cover;
+      z-index: 1;
+    }
+
+    .parallax-foreground {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url('ideetje.jpg') no-repeat center center;
+      background-size: contain;
+      z-index: 2;
+    }
 </style>
 </head>
 <body>
@@ -67,9 +94,12 @@
 include 'header.php';
 ?>
   <main>
-    <setion class="layer-main">
+    <div class="parallax-container">
+    <div class="parallax-background"></div>
+    <div class="parallax-foreground"></div>
+
       <h1>Welkom Bij KnipKnap</h1>
-    </section>
+    </div>
     <section class="content">
       <p>Kom gezellig bij ons knippen!</p>
       <div style="height: 1000px;"></div>
