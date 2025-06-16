@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welkom bij KnipKnap</title>
+  <title>KnipKnap Parallax</title>
 
   <style>
-    /* Prevent all horizontal scroll */
     html, body {
       margin: 0;
       padding: 0;
       overflow-x: hidden;
       font-family: sans-serif;
+      background: #fff;
     }
 
-    .parallax-container {
+    .parallax-section {
       position: relative;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       overflow: hidden;
     }
@@ -31,6 +31,7 @@
       background-repeat: no-repeat;
       background-size: cover;
       will-change: transform;
+      pointer-events: none;
     }
 
     .parallax-background {
@@ -41,8 +42,6 @@
     .parallax-foreground {
       background-image: url('assets/product/ideetje.jpg');
       background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
       z-index: 2;
     }
 
@@ -57,27 +56,40 @@
       text-shadow: 2px 2px 6px #000;
     }
 
-    .content {
+    .main-content {
       position: relative;
-      z-index: 4;
-      background: white;
+      z-index: 10;
+      background: #fff;
       padding: 4rem 2rem;
-      color: #333;
     }
   </style>
 </head>
 <body>
 
-  <section class="parallax-container">
+  <!-- Parallax Section -->
+  <section class="parallax-section">
     <div class="parallax-background" id="bg"></div>
     <div class="parallax-foreground" id="fg"></div>
     <div class="parallax-text">Welkom bij KnipKnap</div>
   </section>
 
-  <section class="content">
-    <h2>Kom gezellig bij ons knippen!</h2>
-    <p>Scroll naar beneden voor meer informatie.</p>
-    <div style="height: 1500px;"></div>
+  <!-- Main Content Section -->
+  <section class="main-content">
+    <h2>Over ons</h2>
+    <p>Kom gezellig bij ons knippen!</p>
+
+    <h2>Onze Services</h2>
+    <ul>
+      <li>Knippen dames: €22</li>
+      <li>Knippen heren: €22</li>
+      <li>Kinderen: €15</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>Adres: KnipKnapstraat 1, Kappersdorp</p>
+    <p>Bel: 012-3456789</p>
+
+    <div style="height: 1000px;"></div> <!-- scroll filler -->
   </section>
 
   <script>
