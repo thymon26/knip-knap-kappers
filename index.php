@@ -83,6 +83,7 @@ include 'header.php';
   <main>
     <div class="banner"></div>
     <section class="hero">
+      
       <h1>Welkom Bij KnipKnap</h1>
     </section>
     <section class="content">
