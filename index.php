@@ -59,63 +59,6 @@
     max-width: 350px;
   }
 }
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      font-family: sans-serif;
-      background: #fff;
-    }
-
-    .parallax-section {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .parallax-background, .parallax-foreground {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      will-change: transform;
-      pointer-events: none;
-    }
-
-    .parallax-background {
-      background-image: url('assets/product/ideetje.avif');
-      z-index: 1;
-    }
-
-    .parallax-foreground {
-      background-image: url('assets/product/ideetje.jpg');
-      background-size: contain;
-      z-index: 2;
-    }
-
-    .parallax-text {
-      position: relative;
-      z-index: 3;
-      text-align: center;
-      padding-top: 40vh;
-      color: white;
-      font-size: 3rem;
-      font-weight: bold;
-      text-shadow: 2px 2px 6px #000;
-    }
-
-    .main-content {
-      position: relative;
-      z-index: 10;
-      background: #fff;
-      padding: 4rem 2rem;
-    }
-
 </style>
 </head>
 <body>
@@ -124,18 +67,20 @@
 include 'header.php';
 ?>
   <main>
-    <section class="parallax-section">
+     <section class="parallax-section">
     <div class="parallax-background" id="bg"></div>
     <div class="parallax-foreground" id="fg"></div>
-    <div class="parallax-text">Welkom bij KnipKnap</div>
-  </section>
-  <!-- Main Content Section -->
-  <section class="main-content">
-    <h2>Over ons</h2>
-    <p>Kom gezellig bij ons knippen!</p>
+      </section>
+
+    <section class="hero">
+      <h1>Welkom Bij KnipKnap</h1>
+    </section>
+    <section class="content">
+      <p>Kom gezellig bij ons knippen!</p>
       <div style="height: 1000px;"></div>
     </section>
     <section class="content" id="services">
+      <div style="height: 1000px;">
       <p>Onze services</p>
       <div style="margin-bottom: 1.5rem;">
         <button class="service-filter-btn" data-filter="dames">Dames</button>
@@ -143,6 +88,7 @@ include 'header.php';
         <button class="service-filter-btn" data-filter="kinderen">Kinderen</button>
       </div>
       <div class="services-container">
+        <div style="height: 1000px;">
         <div class="service-box" data-type="dames">
           <div class="service-title">Knippen Dames</div>
           <div class="service-desc">Professioneel knippen voor dames. 
