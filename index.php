@@ -18,7 +18,7 @@ body {
 }
 
 .parallax {
-  perspective: 100px;
+  perspective: 200px;
   height: 100vh;
   overflow-x: hidden;
   /* REMOVE THIS LINE 👇 */
