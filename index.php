@@ -21,15 +21,16 @@ body {
   perspective: 100px;
   height: 100vh;
   overflow-x: hidden;
-  overflow-y: auto;
+  /* REMOVE THIS LINE 👇 */
+  /* overflow-y: auto; */
   position: absolute;
   top: 0;
   left: 50%;
   right: 0;
   bottom: 0;
   margin-left: -1500px;
+  pointer-events: none; /* optional: prevents blocking clicks */
 }
-
 .parallax__layer {
   position: absolute;
   top: 0;
