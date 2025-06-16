@@ -8,23 +8,76 @@
 
 <!-- Services Boxes CSS -->
 <style>
-    .parallax-section {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-    .parallax-background {
-      background-image: url('assets/product/ideetje\ -\ Copy.avif');
-      z-index: 1;
-    }
+html,
+body {
+  background-color: #FEDCC8;
+}
 
-    .main-content {
-      position: relative;
-      z-index: 10;
-      background: #fff;
-      padding: 4rem 2rem;
-    }
+.parallax {
+  perspective: 100px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  margin-left: -1500px;
+}
+
+.parallax__layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.parallax__layer img {
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+
+.parallax__cover {
+  background: #2D112B;
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 2000px;
+  z-index: 2;
+}
+
+.parallax__layer__0 {
+  transform: translateZ(-300px) scale(4);
+}
+
+.parallax__layer__1 {
+  transform: translateZ(-250px) scale(3.5);
+}
+
+.parallax__layer__2 {
+  transform: translateZ(-200px) scale(3);
+}
+
+.parallax__layer__3 {
+  transform: translateZ(-150px) scale(2.5);
+}
+
+.parallax__layer__4 {
+  transform: translateZ(-100px) scale(2);
+}
+
+.parallax__layer__5 {
+  transform: translateZ(-50px) scale(1.5);
+}
+
+.parallax__layer__6 {
+  transform: translateZ(0px) scale(1);
+}
+
 .services-container {
   display: flex;
   flex-wrap: wrap;
@@ -83,17 +136,39 @@
 // Include header file 
 include 'header.php';
 ?>
+<div class="parallax">
+    <div class="parallax__layer parallax__layer__0">
+        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_0.png?raw=true" />
+    </div>
+    <div class="parallax__layer parallax__layer__1">
+        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_1.png?raw=true" />
+    </div>
+    <div class="parallax__layer parallax__layer__2">
+        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_2.png?raw=true" />
+    </div>
+    <div class="parallax__layer parallax__layer__3">
+        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_3.png?raw=true" />
+    </div>
+    <div class="parallax__layer parallax__layer__4">
+        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_4.png?raw=true" />
+    </div>
+    <div class="parallax__layer parallax__layer__5">
+        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_5.png?raw=true" />
+    </div>
+    <div class="parallax__layer parallax__layer__6">
+        <img src="https://github.com/samdbeckham/blog/blob/master/dev/_assets/images/articles/firewatch/layer_6.png?raw=true" />
+    </div>
+    <div class="parallax__cover"></div>
+</div>
   <main>
-     <section class="parallax-section">
-    <div class="parallax-background" id="bg"></div>
-    <div class="parallax-foreground" id="fg"></div>
-      </section>
+    <section class="hero">
+      <h1>Welkom Bij KnipKnap</h1>
+    </section>
     <section class="content">
       <p>Kom gezellig bij ons knippen!</p>
       <div style="height: 1000px;"></div>
     </section>
     <section class="content" id="services">
-      <div style="height: 1000px;">
       <p>Onze services</p>
       <div style="margin-bottom: 1.5rem;">
         <button class="service-filter-btn" data-filter="dames">Dames</button>
@@ -101,7 +176,6 @@ include 'header.php';
         <button class="service-filter-btn" data-filter="kinderen">Kinderen</button>
       </div>
       <div class="services-container">
-        <div style="height: 1000px;">
         <div class="service-box" data-type="dames">
           <div class="service-title">Knippen Dames</div>
           <div class="service-desc">Professioneel knippen voor dames. 
