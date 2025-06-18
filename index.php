@@ -223,9 +223,24 @@ include 'header.php';
       <p>Producten</p>
       <div style="height: 1000px;"></div>
     </section>
-    <section class="content">
-      <p>Openingstijden</p>
-      <div style="height: 1000px;"></div>
+    <section class="content" id="openingstijden">
+      <div class="openingstijden-container">
+        <h2 class="openingstijden-title"><i class="bi bi-clock"></i> Openingstijden</h2>
+        <table class="openingstijden-tabel">
+          <tbody>
+            <tr><td>Maandag</td><td>09:00 - 18:00</td></tr>
+            <tr><td>Dinsdag</td><td>09:00 - 18:00</td></tr>
+            <tr><td>Woensdag</td><td>09:00 - 18:00</td></tr>
+            <tr><td>Donderdag</td><td>09:00 - 20:00 <span class="avond">Late night!</span></td></tr>
+            <tr><td>Vrijdag</td><td>09:00 - 18:00</td></tr>
+            <tr><td>Zaterdag</td><td>09:00 - 16:00</td></tr>
+            <tr><td>Zondag</td><td class="gesloten">Gesloten</td></tr>
+          </tbody>
+        </table>
+        <div class="openingstijden-bar-tip">
+          <i class="bi bi-cup-straw"></i> Onze bar is tijdens openingstijden geopend voor koffie, thee en fris!
+        </div>
+      </div>
     </section>
   </main>
 
