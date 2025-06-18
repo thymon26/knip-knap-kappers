@@ -92,7 +92,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.85); /* overlay voor leesbaarheid */
+  background: rgba(255, 255, 255, 0.57); /* overlay voor leesbaarheid */
   z-index: -1;
 }
   .hero h1 {
