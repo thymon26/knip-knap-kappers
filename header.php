@@ -179,7 +179,7 @@
 
     .reserveren:hover {
         transform: translateY(-3px);
-        box-shadow: 0 12px 25px rgba(255, 215, 0, 0.6);
+        box-shadow: 0 12px 25px rgba(191, 161, 70, 0.6);
         font-size: 100%;
     }
 
