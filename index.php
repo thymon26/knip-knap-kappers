@@ -221,7 +221,6 @@
         position: relative;
         transition: transform 0.2s, box-shadow 0.2s;
         overflow: visible;
-        width: 100%;
     }
     #top-producten .img-hover-wrapper {
         position: relative;
