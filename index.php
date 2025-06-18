@@ -316,7 +316,31 @@ include 'header.php';
 <?php
 require_once 'db.php';
 $services = $pdo->query("SELECT * FROM services WHERE actief = 1 ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
+
+// Haal de 3 bestverkochte producten op via order_items
+$top3 = $pdo->query("
+    SELECT 
+        p.*, 
+        SUM(oi.aantal) as totaal_verkocht
+    FROM producten p
+    JOIN order_items oi ON oi.product_id = p.id
+    GROUP BY p.id
+    ORDER BY totaal_verkocht DESC
+    LIMIT 3
+")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Welkom bij Knip Knap Kappers</h1>
+        <p class="lead">
+          Knip Knap Kappers is niet zomaar een kapsalon: bij ons kun je niet alleen terecht voor een frisse coupe, maar ook voor een gezellig drankje aan onze bar.<br>
+          Kom langs voor een knipbeurt én geniet van een ontspannen sfeer met een kop koffie, thee of iets anders lekkers!
+        </p>
+      </div>
+    </section>
+    <section class="content" id="services" style="background: #fcfaf6; padding: 3rem 0 2rem 0;">
+
 <section class="content" id="services" style="background: #fcfaf6; padding: 3rem 0 2rem 0;">
   <div class="container">
     <h2 style="text-align:center; color:#bfa046; font-weight:800; margin-bottom:0.5rem;">
