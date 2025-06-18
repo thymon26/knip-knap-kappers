@@ -205,7 +205,7 @@
   }
 }
 
-/* Product Card Styling voor Top 3 Bestverkochte Producten */
+/* Product Card Styling - exact als producten.php */
 #top-producten .row {
     align-items: stretch;
 }
@@ -215,11 +215,11 @@
     height: 100%;
     position: relative;
     transition: transform 0.2s, box-shadow 0.2s;
-    overflow: visible;
+    overflow: visible; /* belangrijk voor zweven */
 }
 #top-producten .img-hover-wrapper {
     position: relative;
-    height: 220px;
+    height: 220px; /* zelfde als max-height afbeelding */
     width: 100%;
     overflow: visible;
     z-index: 1;
@@ -237,6 +237,7 @@
     background: none;
 }
 #top-producten .card.h-100:hover .img-hover-wrapper .card-img-top {
+    /* Alleen vergroten, niet verplaatsen */
     transform: scale(1.08);
     z-index: 20;
     background: none;
@@ -261,7 +262,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background: rgba(80,80,80,0.7);
+    background: rgba(80,80,80,0.7); /* grijs en doorzichtig */
     color: #fff;
     border: none;
     border-radius: 0 0 0.5rem 0.5rem;
@@ -386,34 +387,36 @@ $top3 = $pdo->query("
       <h2 style="text-align:center; color:#bfa046; font-weight:700; margin-bottom:1.5rem;">
         <i class="bi bi-star-fill"></i> Top 3 Best Verkochte Producten
       </h2>
-      <div class="row justify-content-center" style="gap:2rem;">
-        <?php foreach($top3 as $product): ?>
-          <div class="col-md-4 mb-4">
-            <div class="card h-100" data-product-id="<?= $product['id'] ?>">
-              <div class="img-hover-wrapper" style="height:220px;">
-                <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
+      <div class="container">
+        <div class="row justify-content-center">
+          <?php foreach($top3 as $product): ?>
+            <div class="col-md-4 mb-4 d-flex">
+              <div class="card h-100 w-100" data-product-id="<?= $product['id'] ?>">
+                <div class="img-hover-wrapper" style="height:220px;">
+                  <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
+                  <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
+                </div>
+                <div class="card-footer">
+                  <?php if (!empty($product['korting'])): ?>
+                    <span class="text-decoration-line-through text-muted">€<?= number_format($product['prijs'], 2, ',', '.') ?></span>
+                    <strong class="ms-2 text-success">
+                      €<?= number_format($product['prijs'] - $product['korting'], 2, ',', '.') ?>
+                    </strong>
+                    <span class="badge bg-success ms-2">Korting!</span>
+                  <?php else: ?>
+                    <strong>€<?= number_format($product['prijs'], 2, ',', '.') ?></strong>
+                  <?php endif; ?>
+                </div>
+                <button class="btn add-to-cart-btn" style="background-color: rgba(80,80,80,0.7); color: #fff; border: none;">
+                  <i class="bi bi-cart-plus"></i> Add to cart
+                </button>
               </div>
-              <div class="card-body">
-                <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
-                <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
-              </div>
-              <div class="card-footer">
-                <?php if (!empty($product['korting'])): ?>
-                  <span class="text-decoration-line-through text-muted">€<?= number_format($product['prijs'], 2, ',', '.') ?></span>
-                  <strong class="ms-2 text-success">
-                    €<?= number_format($product['prijs'] - $product['korting'], 2, ',', '.') ?>
-                  </strong>
-                  <span class="badge bg-success ms-2">Korting!</span>
-                <?php else: ?>
-                  <strong>€<?= number_format($product['prijs'], 2, ',', '.') ?></strong>
-                <?php endif; ?>
-              </div>
-              <button class="btn add-to-cart-btn" style="background-color: rgba(80,80,80,0.7); color: #fff; border: none;">
-                <i class="bi bi-cart-plus"></i> Add to cart
-              </button>
             </div>
-          </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        </div>
       </div>
     </section>
     <section class="content" id="openingstijden">
