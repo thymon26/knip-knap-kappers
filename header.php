@@ -33,7 +33,7 @@
     }
     .header.shrink .reserveren:hover {
     font-size: 1rem;
-    box-shadow: 0 12px 25pxrgba(191, 161, 70, 0.6);
+    box-shadow: 0 12px 25px rgba(191, 161, 70, 0.6);
     transform: translateY(-3px);
     }
     body {
