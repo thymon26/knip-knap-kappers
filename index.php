@@ -387,9 +387,9 @@ $top3 = $pdo->query("
         <i class="bi bi-star-fill"></i> Top 3 Best Verkochte Producten
       </h2>
       <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
           <?php foreach($top3 as $product): ?>
-            <div class="col-md-4 mb-4 d-flex">
+            <div class="col-md-4 mb-4">
               <div class="card h-100 w-100" data-product-id="<?= $product['id'] ?>">
                 <div class="img-hover-wrapper" style="height:220px;">
                   <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
