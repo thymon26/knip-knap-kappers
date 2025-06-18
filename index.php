@@ -313,75 +313,107 @@ $top3 = $pdo->query("
         </p>
       </div>
     </section>
-    <section class="content" id="services">
-      <p>Onze services</p>
-      <div style="margin-bottom: 1.5rem;">
-        <button class="service-filter-btn" data-filter="dames">Dames</button>
-        <button class="service-filter-btn" data-filter="heren">Heren</button>
-        <button class="service-filter-btn" data-filter="kinderen">Kinderen</button>
-      </div>
-      <div class="services-container">
-        <div class="service-box" data-type="dames">
+    <section class="content" id="services" style="background: #fcfaf6; padding: 3rem 0 2rem 0;">
+  <div class="container">
+    <h2 style="text-align:center; color:#bfa046; font-weight:800; margin-bottom:0.5rem;">
+      <i class="bi bi-scissors"></i> Onze behandelingen & services
+    </h2>
+    <p style="text-align:center; color:#555; font-size:1.15rem; margin-bottom:2.2rem;">
+      Kies uit onze professionele behandelingen voor dames, heren en kinderen.<br>
+      Voor elk haartype en elke wens hebben wij een passende service!
+    </p>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-person-fill"></i></div>
           <div class="service-title">Knippen Dames</div>
-          <div class="service-desc">Professioneel knippen voor dames. 
-            <p>Keuze uit meerdere behandelingen. </p>
-            <p>Bekijk al onze knip services met prijzen.</p>
-          </div>
+          <div class="service-desc">Professioneel knippen voor dames. Keuze uit meerdere behandelingen.</div>
           <div class="service-price">€22</div>
         </div>
-        <div class="service-box" data-type="heren">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-person"></i></div>
           <div class="service-title">Knippen Heren</div>
           <div class="service-desc">Professioneel knippen voor heren.</div>
           <div class="service-price">€22</div>
         </div>
-        <div class="service-box" data-type="kinderen">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-emoji-smile"></i></div>
           <div class="service-title">Baby/Kinderen</div>
           <div class="service-desc">Knippen voor baby's en kinderen t/m 12 jaar.</div>
           <div class="service-price">€15</div>
         </div>
-        <div class="service-box" data-type="dames">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-palette"></i></div>
           <div class="service-title">Verven</div>
           <div class="service-desc">Volledige haarkleuring met kwaliteitsproducten.</div>
           <div class="service-price">v.a. €38</div>
         </div>
-        <div class="service-box" data-type="dames">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-droplet-half"></i></div>
           <div class="service-title">Kleurspoeling</div>
           <div class="service-desc">Tijdelijke kleurspoeling voor een frisse look.</div>
           <div class="service-price">v.a. €28</div>
         </div>
-        <div class="service-box" data-type="dames">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-brightness-high"></i></div>
           <div class="service-title">Highlights</div>
           <div class="service-desc">Highlights voor een natuurlijk lichte uitstraling.</div>
           <div class="service-price">v.a. €45</div>
         </div>
-        <div class="service-box" data-type="dames">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-brush"></i></div>
           <div class="service-title">Balayage</div>
           <div class="service-desc">Trendy balayage techniek voor een subtiele overgang.</div>
           <div class="service-price">v.a. €65</div>
         </div>
-        <div class="service-box" data-type="dames">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-lightning"></i></div>
           <div class="service-title">Blonderen</div>
           <div class="service-desc">Blonderen voor een stralend blond resultaat.</div>
           <div class="service-price">v.a. €50</div>
         </div>
-        <div class="service-box" data-type="dames heren kinderen">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-stars"></i></div>
           <div class="service-title">Styling</div>
           <div class="service-desc">Styling voor elke gelegenheid, van casual tot feestelijk.</div>
           <div class="service-price">v.a. €18</div>
         </div>
-        <div class="service-box" data-type="dames heren kinderen">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-heart-pulse"></i></div>
           <div class="service-title">Verzorging</div>
           <div class="service-desc">Intensieve haarverzorging en treatments.</div>
           <div class="service-price">v.a. €12</div>
         </div>
-        <div class="service-box" data-type="dames">
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <div class="service-box h-100 text-center">
+          <div style="font-size:2.2rem; color:#bfa046;"><i class="bi bi-arrow-repeat"></i></div>
           <div class="service-title">Permanent</div>
           <div class="service-desc">Permanente omvorming voor meer volume of krul.</div>
           <div class="service-price">v.a. €55</div>
         </div>
       </div>
-      <div style="height: auto;"></div>
-    </section>
+    </div>
+  </div>
+</section>
     <section class="content">
       <p>Gallerij</p>
       <div style="height: 1000px;"></div>
