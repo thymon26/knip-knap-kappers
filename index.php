@@ -215,11 +215,11 @@
     height: 100%;
     position: relative;
     transition: transform 0.2s, box-shadow 0.2s;
-    overflow: visible; /* belangrijk voor zweven */
+    overflow: visible;
 }
 #top-producten .img-hover-wrapper {
     position: relative;
-    height: 220px; /* zelfde als max-height afbeelding */
+    height: 220px;
     width: 100%;
     overflow: visible;
     z-index: 1;
@@ -237,7 +237,6 @@
     background: none;
 }
 #top-producten .card.h-100:hover .img-hover-wrapper .card-img-top {
-    /* Alleen vergroten, niet verplaatsen */
     transform: scale(1.08);
     z-index: 20;
     background: none;
@@ -262,7 +261,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background: rgba(80,80,80,0.7); /* grijs en doorzichtig */
+    background: rgba(80,80,80,0.7);
     color: #fff;
     border: none;
     border-radius: 0 0 0.5rem 0.5rem;
