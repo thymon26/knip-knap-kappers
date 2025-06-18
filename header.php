@@ -10,7 +10,7 @@
         <ul class="nav-links navbar-nav ms-auto" id="navLinks">
             <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="producten.php">Producten</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Prijzen</a></li>
+            <li class="nav-item"><a class="nav-link" href="prijzen.php">Prijzen</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
             <li class="nav-item d-flex align-items-center">
                 <a href="cart.php" class="nav-link p-0 me-2">
