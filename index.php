@@ -8,6 +8,20 @@
 
 <!-- Services Boxes CSS -->
 <style>
+  .banner{
+      background-image: url("assets/product/ideetje2\ -\ Copy.jpg");
+      perspective: 100px;
+      height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      right: 0;
+      bottom: 0;
+      margin-left: -1500px;
+    }
+
 .services-container {
   display: flex;
   flex-wrap: wrap;
@@ -67,7 +81,9 @@
 include 'header.php';
 ?>
   <main>
+    <div class="banner"></div>
     <section class="hero">
+      
       <h1>Welkom Bij KnipKnap</h1>
     </section>
     <section class="content">
