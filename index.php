@@ -380,7 +380,7 @@ $top3 = $pdo->query("
           <div class="service-price">v.a. €55</div>
         </div>
       </div>
-      <div style="height: 1000px;"></div>
+      <div style="height: auto;"></div>
     </section>
     <section class="content">
       <p>Gallerij</p>
