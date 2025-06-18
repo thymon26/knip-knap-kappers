@@ -211,9 +211,7 @@
         flex-wrap: wrap;
         align-items: stretch;
     }
-    #top-producten .col-md-4 {
-        display: flex;
-    }
+
     #top-producten .card.h-100 {
         display: flex;
         flex-direction: column;
