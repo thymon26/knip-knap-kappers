@@ -146,10 +146,6 @@ include 'header.php';
         </p>
       </div>
     </section>
-    <section class="content">
-      <p>Kom gezellig bij ons knippen!</p>
-      <div style="height: 1000px;"></div>
-    </section>
     <section class="content" id="services">
       <p>Onze services</p>
       <div style="margin-bottom: 1.5rem;">
