@@ -59,6 +59,7 @@ $services = $pdo->query("SELECT * FROM services WHERE actief = 1 ORDER BY id ASC
     </style>
 </head>
 <body>
+    <?php include 'header.php'; ?>
 <div class="container py-5">
     <h1 style="text-align:center; color:#bfa046; font-weight:800; margin-bottom:0.5rem;">
         <i class="bi bi-cash-coin"></i> Prijslijst
