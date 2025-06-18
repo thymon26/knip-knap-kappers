@@ -76,24 +76,25 @@
 
   /* Hero styling */
   .hero {
-    min-height: 60vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    padding-top: 80px;
-    padding-bottom: 60px;
-  }
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.85);
-    z-index: -1;
-  }
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding-top: 80px;
+  padding-bottom: 60px;
+  background: url('assets/background.png') center center/cover no-repeat;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.85); /* overlay voor leesbaarheid */
+  z-index: -1;
+}
   .hero h1 {
     font-size: 2.8rem;
     font-weight: 800;
