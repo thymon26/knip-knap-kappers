@@ -51,9 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $datum = $_POST['datum'] ?? '';
     $tijd = $_POST['tijd'] ?? '';
+    $service = $_POST['service'] ?? '';
 
     // Validatie
-    if (!$naam || !$email || !$datum || !$tijd) {
+    if (!$naam || !$email || !$datum || !$tijd || !$service) {
         $error = "Vul alle velden in.";
     } else {
         $dag = dagnaam($datum);
@@ -74,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $error = "Dit tijdslot is al vol. Kies een ander tijdslot.";
                 } else {
                     // Opslaan
-                    $stmt = $pdo->prepare("INSERT INTO reserveringen (naam, email, datum, tijd) VALUES (?, ?, ?, ?)");
-                    $stmt->execute([$naam, $email, $datum, $tijd]);
+                    $stmt = $pdo->prepare("INSERT INTO reserveringen (naam, email, service, datum, tijd) VALUES (?, ?, ?, ?, ?)");
+                    $stmt->execute([$naam, $email, $service, $datum, $tijd]);
                     $success = true;
 
                     // Mail sturen
@@ -95,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mail->Body    = "<h2>Reserveringsbevestiging</h2>
                         <p>Beste $naam,</p>
                         <p>Je reservering is bevestigd voor <strong>" . date('d-m-Y', strtotime($datum)) . "</strong> om <strong>$tijd</strong>.</p>
+                        <p><strong>Behandeling:</strong> " . htmlspecialchars($service) . "</p>
                         <p>We zien je graag bij Knip Knap Kappers!</p>";
                         $mail->send();
                     } catch (Exception $e) {
@@ -118,6 +120,20 @@ for ($i = 0; $i < $maxDays; $i++) {
         break;
     }
 }
+
+$services = [
+    "Knippen Dames",
+    "Knippen Heren",
+    "Baby/Kinderen",
+    "Verven",
+    "Kleurspoeling",
+    "Highlights",
+    "Balayage",
+    "Blonderen",
+    "Styling",
+    "Verzorging",
+    "Permanent"
+];
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -171,6 +187,15 @@ for ($i = 0; $i < $maxDays; $i++) {
             <div class="mb-3">
                 <label for="email" class="form-label">E-mailadres</label>
                 <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="service" class="form-label">Behandeling / Service</label>
+                <select class="form-select" id="service" name="service" required>
+                    <option value="">Kies een behandeling...</option>
+                    <?php foreach ($services as $srv): ?>
+                        <option value="<?= htmlspecialchars($srv) ?>"><?= htmlspecialchars($srv) ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="datum" class="form-label">Datum</label>
