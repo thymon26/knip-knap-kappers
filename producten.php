@@ -191,14 +191,14 @@ document.querySelectorAll('.add-to-cart-btn').forEach((btn, idx) => {
         }, 900);
 
         // Winkelwagen logica
-        const productId = card.getAttribute('data-product-id') || idx;
+        const productId = parseInt(card.getAttribute('data-product-id'), 10); // <-- Zorg dat dit een integer is
         let cart = getCartCookie();
         let found = cart.find(item => item.id == productId);
         if(found) {
             found.qty += 1;
         } else {
             cart.push({
-                id: productId,
+                id: productId, // <-- integer product id
                 naam: card.querySelector('.card-title').textContent,
                 afbeelding: img.src,
                 prijs: card.querySelector('.card-footer strong').textContent,

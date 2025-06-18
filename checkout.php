@@ -132,11 +132,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
             $orderId = $pdo->lastInsertId();
 
-            $stmtItem = $pdo->prepare("INSERT INTO order_items (order_id, product_naam, aantal, prijs) VALUES (?, ?, ?, ?)");
+            $stmtItem = $pdo->prepare("INSERT INTO order_items (order_id, product_id, product_naam, aantal, prijs) VALUES (?, ?, ?, ?, ?)");
             foreach ($cart as $item) {
                 $prijs = floatval(str_replace([',', '€'], ['.', ''], $item['prijs']));
+                $product_id = (isset($item['id']) && is_numeric($item['id'])) ? (int)$item['id'] : null;
                 $stmtItem->execute([
                     $orderId,
+                    $product_id,
                     $item['naam'],
                     $item['qty'],
                     $prijs
