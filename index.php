@@ -111,14 +111,24 @@
     font-weight: 500;
     line-height: 1.6;
   }
-  @media (max-width: 600px) {
-    .hero h1 {
-      font-size: 2rem;
-    }
-    .hero .lead {
-      font-size: 1.05rem;
-    }
+  .hero-content {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 650px;
+  margin: 0 auto;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  opacity: 0.97;
+}
+@media (max-width: 700px) {
+  .hero-content {
+    padding: 1.2rem 0.8rem 1.2rem 0.8rem;
+    max-width: 98vw;
   }
+}
 </style>
 </head>
 <body>
@@ -128,11 +138,13 @@ include 'header.php';
 ?>
   <main>
     <section class="hero">
-      <h1>Welkom bij Knip Knap Kappers</h1>
-      <p class="lead">
-        Knip Knap Kappers is niet zomaar een kapsalon: bij ons kun je niet alleen terecht voor een frisse coupe, maar ook voor een gezellig drankje aan onze bar.<br>
-        Kom langs voor een knipbeurt én geniet van een ontspannen sfeer met een kop koffie, thee of iets anders lekkers!
-      </p>
+      <div class="hero-content">
+        <h1>Welkom bij Knip Knap Kappers</h1>
+        <p class="lead">
+          Knip Knap Kappers is niet zomaar een kapsalon: bij ons kun je niet alleen terecht voor een frisse coupe, maar ook voor een gezellig drankje aan onze bar.<br>
+          Kom langs voor een knipbeurt én geniet van een ontspannen sfeer met een kop koffie, thee of iets anders lekkers!
+        </p>
+      </div>
     </section>
     <section class="content">
       <p>Kom gezellig bij ons knippen!</p>
