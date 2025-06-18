@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sticky Transparante Header</title>
+    <title>Knip Knap Kappers - Home</title>
 
 
 <!-- Services Boxes CSS -->
@@ -22,57 +22,57 @@
       margin-left: -1500px;
     }
 
-.services-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  margin: 2rem 0;
-}
-.service-box {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  padding: 2rem 1.5rem;
-  width: 260px;
-  min-height: 210px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.service-box:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.14);
-}
-.service-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #222;
-}
-.service-desc {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 1.2rem;
-}
-.service-price {
-  margin-top: auto;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #bfa046;
-  letter-spacing: 0.5px;
-}
-@media (max-width: 900px) {
   .services-container {
-    flex-direction: column;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin: 2rem 0;
   }
   .service-box {
-    width: 90%;
-    max-width: 350px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    padding: 2rem 1.5rem;
+    width: 260px;
+    min-height: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-}
+  .service-box:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+  }
+  .service-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #222;
+  }
+  .service-desc {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1.2rem;
+  }
+  .service-price {
+    margin-top: auto;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #bfa046;
+    letter-spacing: 0.5px;
+  }
+  @media (max-width: 900px) {
+    .services-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .service-box {
+      width: 90%;
+      max-width: 350px;
+    }
+  }
 </style>
 </head>
 <body>
