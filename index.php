@@ -206,78 +206,80 @@
 }
 
 /* Product Card Styling - exact als producten.php */
-#top-producten .row {
-    align-items: stretch;
-}
-#top-producten .card.h-100 {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-    overflow: visible;
-}
-#top-producten .img-hover-wrapper {
-    position: relative;
-    height: 220px;
-    width: 100%;
-    overflow: visible;
-    z-index: 1;
-}
-#top-producten .card-img-top {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-    transition: 
-        transform 0.4s cubic-bezier(.4,2,.6,1), 
-        box-shadow 0.3s;
-    position: relative;
-    z-index: 2;
-    background: none;
-}
-#top-producten .card.h-100:hover .img-hover-wrapper .card-img-top {
-    transform: scale(1.08);
-    z-index: 20;
-    background: none;
-}
-#top-producten .card-body {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-#top-producten .card-footer {
-    background: #fff;
-    border-top: none;
-}
-#top-producten .card.h-100:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    z-index: 2;
-}
-#top-producten .add-to-cart-btn {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(80,80,80,0.7);
-    color: #fff;
-    border: none;
-    border-radius: 0 0 0.5rem 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    z-index: 10;
-}
-#top-producten .card.h-100:hover .add-to-cart-btn {
-    opacity: 1;
-    pointer-events: auto;
-}
+
+    .row {
+        align-items: stretch;
+    }
+    .card.h-100 {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow: visible; /* belangrijk voor zweven */
+    }
+    .img-hover-wrapper {
+        position: relative;
+        height: 220px; /* zelfde als max-height afbeelding */
+        width: 100%;
+        overflow: visible;
+        z-index: 1;
+    }
+    .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        transition: 
+            transform 0.4s cubic-bezier(.4,2,.6,1), 
+            box-shadow 0.3s;
+        position: relative;
+        z-index: 2;
+        background: none;
+    }
+    .card.h-100:hover .img-hover-wrapper .card-img-top {
+        /* Alleen vergroten, niet verplaatsen */
+        transform: scale(1.08);
+        z-index: 20;
+        background: none;
+    }
+    .card-body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .card-footer {
+        background: #fff;
+        border-top: none;
+    }
+    .card.h-100:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        z-index: 2;
+    }
+    .add-to-cart-btn {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(80,80,80,0.7); /* grijs en doorzichtig */
+        color: #fff;
+        border: none;
+        border-radius: 0 0 0.5rem 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+        z-index: 10;
+    }
+    .card.h-100:hover .add-to-cart-btn {
+        opacity: 1;
+        pointer-events: auto;
+    }
   </style>
 </head>
 <body>
