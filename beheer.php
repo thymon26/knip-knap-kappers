@@ -80,6 +80,11 @@ $producten = $pdo->query("SELECT * FROM producten ORDER BY id DESC")->fetchAll(P
 $reserveringen = $pdo->query("SELECT * FROM reserveringen ORDER BY datum DESC, tijd DESC")->fetchAll(PDO::FETCH_ASSOC);
 $bestellingen = $pdo->query("SELECT * FROM orders ORDER BY besteld_op DESC")->fetchAll(PDO::FETCH_ASSOC);
 $services = $pdo->query("SELECT * FROM services ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
+$bootstrap_icons = [
+    'bi-scissors', 'bi-person-fill', 'bi-person', 'bi-emoji-smile', 'bi-palette', 'bi-droplet-half',
+    'bi-brightness-high', 'bi-brush', 'bi-lightning', 'bi-stars', 'bi-heart-pulse', 'bi-arrow-repeat',
+    // Voeg hier meer iconen toe indien gewenst
+];
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -87,6 +92,7 @@ $services = $pdo->query("SELECT * FROM services ORDER BY id ASC")->fetchAll(PDO:
     <meta charset="UTF-8">
     <title>Beheer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body { background: #f6f6f6; }
         .beheer-container { max-width: 1200px; margin: 2rem auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(191,160,70,0.10); padding: 2rem; }
@@ -188,7 +194,17 @@ $services = $pdo->query("SELECT * FROM services ORDER BY id ASC")->fetchAll(PDO:
         <div class="col"><input type="text" name="naam" class="form-control" placeholder="Naam" required></div>
         <div class="col"><input type="text" name="beschrijving" class="form-control" placeholder="Beschrijving"></div>
         <div class="col"><input type="number" step="0.01" name="prijs" class="form-control" placeholder="Prijs" required></div>
-        <div class="col"><input type="text" name="icoon" class="form-control" placeholder="Bootstrap icoon (bi-...)" required></div>
+        <div class="col">
+            <select name="icoon" class="form-select icon-picker" required>
+                <option value="">Kies een icoon...</option>
+                <?php foreach($bootstrap_icons as $icon): ?>
+                    <option value="<?= $icon ?>" <?= (isset($s) && $s['icoon'] == $icon) ? 'selected' : '' ?>>
+                        <?= $icon ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <span class="icon-preview" style="font-size:1.5rem;vertical-align:middle;margin-left:8px;"></span>
+        </div>
         <div class="col"><input type="checkbox" name="actief" checked> Actief</div>
         <div class="col"><button class="btn btn-success" type="submit">Toevoegen</button></div>
     </form>
@@ -207,7 +223,17 @@ $services = $pdo->query("SELECT * FROM services ORDER BY id ASC")->fetchAll(PDO:
                     <td><input type="text" name="naam" value="<?= htmlspecialchars($s['naam']) ?>" class="form-control form-control-sm"></td>
                     <td><input type="text" name="beschrijving" value="<?= htmlspecialchars($s['beschrijving']) ?>" class="form-control form-control-sm"></td>
                     <td><input type="number" step="0.01" name="prijs" value="<?= $s['prijs'] ?>" class="form-control form-control-sm"></td>
-                    <td><input type="text" name="icoon" value="<?= htmlspecialchars($s['icoon']) ?>" class="form-control form-control-sm"></td>
+                    <td>
+                        <select name="icoon" class="form-select icon-picker" required>
+                            <option value="">Kies een icoon...</option>
+                            <?php foreach($bootstrap_icons as $icon): ?>
+                                <option value="<?= $icon ?>" <?= (isset($s) && $s['icoon'] == $icon) ? 'selected' : '' ?>>
+                                    <?= $icon ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <span class="icon-preview" style="font-size:1.5rem;vertical-align:middle;margin-left:8px;"></span>
+                    </td>
                     <td><input type="checkbox" name="actief" <?= $s['actief'] ? 'checked' : '' ?>></td>
                     <td>
                         <button class="btn btn-primary btn-sm" type="submit">Opslaan</button>
@@ -219,5 +245,30 @@ $services = $pdo->query("SELECT * FROM services ORDER BY id ASC")->fetchAll(PDO:
         </tbody>
     </table>
 </div>
+<script>
+document.querySelectorAll('.icon-picker').forEach(function(select){
+    // Live preview
+    select.addEventListener('change', function(){
+        const preview = select.parentElement.querySelector('.icon-preview');
+        preview.innerHTML = select.value ? `<i class="bi ${select.value}"></i>` : '';
+    });
+    // Toon direct bij laden
+    if(select.value) {
+        const preview = select.parentElement.querySelector('.icon-preview');
+        preview.innerHTML = `<i class="bi ${select.value}"></i>`;
+    }
+    // Zoekfunctie
+    select.addEventListener('input', function(){
+        let val = select.value.toLowerCase();
+        Array.from(select.options).forEach(opt => {
+            if(opt.value === "" || opt.value.toLowerCase().includes(val)) {
+                opt.style.display = '';
+            } else {
+                opt.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
