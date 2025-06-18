@@ -174,7 +174,10 @@ for ($i = 0; $i < $maxDays; $i++) {
             </div>
             <div class="mb-3">
                 <label for="datum" class="form-label">Datum</label>
-                <input type="date" class="form-control" id="datum" name="datum" min="<?= $defaultDate ?>" max="<?= date('Y-m-d', strtotime("+13 days", strtotime($defaultDate))) ?>" value="<?= $defaultDate ?>" required>
+                <input type="date" class="form-control" id="datum" name="datum"
+                    min="<?= $defaultDate ?>"
+                    max="<?= date('Y-m-d', strtotime("+13 days", strtotime($defaultDate))) ?>"
+                    value="<?= $defaultDate ?>" required>
             </div>
             <div class="mb-3">
                 <label for="tijd" class="form-label">Tijd</label>
@@ -194,24 +197,28 @@ for ($i = 0; $i < $maxDays; $i++) {
     <?php endif; ?>
 </div>
 <script>
-document.getElementById('datum').addEventListener('change', function() {
-    const datum = this.value;
-    fetch('reserveren.php?slots=1&datum=' + datum)
-        .then(resp => resp.json())
-        .then(data => {
-            const tijdSelect = document.getElementById('tijd');
-            tijdSelect.innerHTML = '<option value="">Kies een tijd...</option>';
-            data.forEach(slot => {
-                const opt = document.createElement('option');
-                opt.value = slot.tijd;
-                opt.textContent = slot.tijd + (slot.vol ? ' (vol)' : '');
-                if(slot.vol) {
-                    opt.disabled = true;
-                    opt.className = 'slot-vol';
-                }
-                tijdSelect.appendChild(opt);
-            });
-        });
+const dateInput = document.getElementById('datum');
+dateInput.addEventListener('input', function() {
+    // 0 = zondag, 6 = zaterdag
+    const d = new Date(this.value);
+    if (d.getDay() === 0) {
+        this.setCustomValidity('Zondagen zijn niet beschikbaar.');
+        this.value = '';
+    } else {
+        this.setCustomValidity('');
+    }
+});
+
+// Blokkeer zondagen bij het openen van de kalender (optioneel, visueel)
+dateInput.addEventListener('keydown', function(e) {
+    setTimeout(() => {
+        if (this.value) {
+            const d = new Date(this.value);
+            if (d.getDay() === 0) {
+                this.value = '';
+            }
+        }
+    }, 10);
 });
 </script>
 <?php
