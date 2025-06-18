@@ -7,8 +7,8 @@
 
 
 <!-- Services Boxes CSS -->
-<style>
-  .banner{
+  <style>
+    .banner{
       background-image: url("assets/product/ideetje2\ -\ Copy.jpg");
       perspective: 100px;
       height: 100vh;
@@ -22,210 +22,215 @@
       margin-left: -1500px;
     }
 
-  .services-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    margin: 2rem 0;
-  }
-  .service-box {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    padding: 2rem 1.5rem;
-    width: 260px;
-    min-height: 210px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .service-box:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
-  }
-  .service-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: #222;
-  }
-  .service-desc {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 1.2rem;
-  }
-  .service-price {
-    margin-top: auto;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #bfa046;
-    letter-spacing: 0.5px;
-  }
-  @media (max-width: 900px) {
     .services-container {
-      flex-direction: column;
-      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2rem 0;
     }
     .service-box {
-      width: 90%;
-      max-width: 350px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      padding: 2rem 1.5rem;
+      width: 260px;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-  }
+    .service-box:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+    }
+    .service-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+    .service-desc {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 1.2rem;
+    }
+    .service-price {
+      margin-top: auto;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #bfa046;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 900px) {
+      .services-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .service-box {
+        width: 90%;
+        max-width: 350px;
+      }
+    }
 
-  /* Hero styling */
-  .hero {
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  padding-top: 80px;
-  padding-bottom: 60px;
-  background: url('assets/background.png') center center/cover no-repeat;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.57); /* overlay voor leesbaarheid */
-  z-index: -1;
-}
-  .hero h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: #bfa046;
-    margin-bottom: 1.2rem;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    /* Hero styling */
+    .hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding-top: 80px;
+    padding-bottom: 60px;
+    background: url('assets/background.png') center center/cover no-repeat;
   }
-  .hero .lead {
-    font-size: 1.25rem;
-    color: #222;
-    max-width: 600px;
-    margin: 0 auto 0.5rem auto;
-    font-weight: 500;
-    line-height: 1.6;
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.57); /* overlay voor leesbaarheid */
+    z-index: -1;
   }
-  .hero-content {
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-  padding: 2.5rem 2rem 2rem 2rem;
-  max-width: 650px;
-  margin: 0 auto;
-  display: inline-block;
-  position: relative;
-  z-index: 2;
-  opacity: 0.97;
-}
-@media (max-width: 700px) {
-  .hero-content {
-    padding: 1.2rem 0.8rem 1.2rem 0.8rem;
-    max-width: 98vw;
-  }
-}
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #bfa046;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .hero .lead {
+      font-size: 1.25rem;
+      color: #222;
+      max-width: 600px;
+      margin: 0 auto 0.5rem auto;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+    .hero-content {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    padding: 2.5rem 2rem 2rem 2rem;
+    max-width: 650px;
+    margin: 0 auto;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    opacity: 0.97;
+    }
+    @media (max-width: 700px) {
+      .hero-content {
+        padding: 1.2rem 0.8rem 1.2rem 0.8rem;
+        max-width: 98vw;
+      }
+    }
 
-.openingstijden-container {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 24px rgba(191,160,70,0.10);
-  max-width: 420px;
-  margin: 2.5rem auto 2rem auto;
-  padding: 2.2rem 2rem 1.5rem 2rem;
-  text-align: center;
-  position: relative;
-}
-.openingstijden-title {
-  color: #bfa046;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-}
-.openingstijden-tabel {
-  width: 100%;
-  margin: 0 auto 1.2rem auto;
-  border-collapse: separate;
-  border-spacing: 0 0.3rem;
-  font-size: 1.08rem;
-}
-.openingstijden-tabel td {
-  padding: 0.4rem 0.7rem;
-  border-radius: 8px;
-  background: #f8f6f2;
-  color: #222;
-}
-.openingstijden-tabel tr td:first-child {
-  font-weight: 600;
-  text-align: left;
-  background: #fffbe9;
-}
-.openingstijden-tabel .gesloten {
-  color: #fff;
-  background: #bfa046;
-  font-weight: 700;
-  text-align: center;
-}
-.openingstijden-tabel .avond {
-  background: #bfa046;
-  color: #fff;
-  border-radius: 8px;
-  padding: 0.1rem 0.6rem;
-  font-size: 0.95em;
-  margin-left: 0.5rem;
-  font-weight: 500;
-}
-.openingstijden-bar-tip {
-  margin-top: 1.2rem;
-  color: #bfa046;
-  font-size: 1.08rem;
-  background: #fffbe9;
-  border-radius: 12px;
-  padding: 0.7rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-@media (max-width: 600px) {
   .openingstijden-container {
-    padding: 1.2rem 0.5rem 1rem 0.5rem;
-    max-width: 99vw;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(191,160,70,0.10);
+    max-width: 420px;
+    margin: 2.5rem auto 2rem auto;
+    padding: 2.2rem 2rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
   }
   .openingstijden-title {
-    font-size: 1.3rem;
+    color: #bfa046;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
   }
-}
+  .openingstijden-tabel {
+    width: 100%;
+    margin: 0 auto 1.2rem auto;
+    border-collapse: separate;
+    border-spacing: 0 0.3rem;
+    font-size: 1.08rem;
+  }
+  .openingstijden-tabel td {
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+    background: #f8f6f2;
+    color: #222;
+  }
+  .openingstijden-tabel tr td:first-child {
+    font-weight: 600;
+    text-align: left;
+    background: #fffbe9;
+  }
+  .openingstijden-tabel .gesloten {
+    color: #fff;
+    background: #bfa046;
+    font-weight: 700;
+    text-align: center;
+  }
+  .openingstijden-tabel .avond {
+    background: #bfa046;
+    color: #fff;
+    border-radius: 8px;
+    padding: 0.1rem 0.6rem;
+    font-size: 0.95em;
+    margin-left: 0.5rem;
+    font-weight: 500;
+  }
+  .openingstijden-bar-tip {
+    margin-top: 1.2rem;
+    color: #bfa046;
+    font-size: 1.08rem;
+    background: #fffbe9;
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  @media (max-width: 600px) {
+    .openingstijden-container {
+      padding: 1.2rem 0.5rem 1rem 0.5rem;
+      max-width: 99vw;
+    }
+    .openingstijden-title {
+      font-size: 1.3rem;
+    }
+  }
 
-/* Product Card Styling - exact als producten.php */
-
-    .row {
+  /* Product Card Styling - exact als producten.php */
+    #top-producten .row {
+        display: flex;
+        flex-wrap: wrap;
         align-items: stretch;
     }
-    .card.h-100 {
+    #top-producten .col-md-4 {
+        display: flex;
+    }
+    #top-producten .card.h-100 {
         display: flex;
         flex-direction: column;
         height: 100%;
         position: relative;
         transition: transform 0.2s, box-shadow 0.2s;
-        overflow: visible; /* belangrijk voor zweven */
+        overflow: visible;
+        width: 100%;
     }
-    .img-hover-wrapper {
+    #top-producten .img-hover-wrapper {
         position: relative;
-        height: 220px; /* zelfde als max-height afbeelding */
+        height: 220px;
         width: 100%;
         overflow: visible;
         z-index: 1;
     }
-    .card-img-top {
+    #top-producten .card-img-top {
         width: 100%;
         height: 100%;
         object-fit: contain;
@@ -237,33 +242,32 @@
         z-index: 2;
         background: none;
     }
-    .card.h-100:hover .img-hover-wrapper .card-img-top {
-        /* Alleen vergroten, niet verplaatsen */
+    #top-producten .card.h-100:hover .img-hover-wrapper .card-img-top {
         transform: scale(1.08);
         z-index: 20;
         background: none;
     }
-    .card-body {
+    #top-producten .card-body {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
     }
-    .card-footer {
+    #top-producten .card-footer {
         background: #fff;
         border-top: none;
     }
-    .card.h-100:hover {
+    #top-producten .card.h-100:hover {
         transform: translateY(-8px) scale(1.03);
         box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         z-index: 2;
     }
-    .add-to-cart-btn {
+    #top-producten .add-to-cart-btn {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
-        background: rgba(80,80,80,0.7); /* grijs en doorzichtig */
+        background: rgba(80,80,80,0.7);
         color: #fff;
         border: none;
         border-radius: 0 0 0.5rem 0.5rem;
@@ -276,7 +280,7 @@
         transition: opacity 0.3s;
         z-index: 10;
     }
-    .card.h-100:hover .add-to-cart-btn {
+    #top-producten .card.h-100:hover .add-to-cart-btn {
         opacity: 1;
         pointer-events: auto;
     }
