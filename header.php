@@ -1,25 +1,31 @@
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <header class="header">
-        <nav class="nav">
-        <img src="/Assets/logo.png" alt="Logo" class="logo"/>
-        <ul class="nav-links">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="producten.php">Producten</a></li>
-            <li><a href="#">Prijzen</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li><a href="cart.php">
-            <button class="cart-btn" id="cartBtn" style="background: none; border: none; position: relative; margin-right: 10px;">
-                <i class="bi bi-cart" style="font-size: 1.7rem;"></i>
-                <span id="cartCount" style="position: absolute; top: -6px; right: -8px; background: #bfa046; color: #fff; border-radius: 50%; font-size: 0.85rem; padding: 2px 7px; min-width: 22px; text-align: center;">0</span>
-            </button>
-            </a>
-            <button class="reserveren" onclick="location.href='reserveren.php'">Reserveren</button>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<header class="header">
+    <nav class="nav navbar navbar-expand-lg">
+        <a class="navbar-brand d-flex align-items-center" href="index.php">
+            <img src="/Assets/logo.png" alt="Logo" class="logo me-2"/>
+        </a>
+        <button class="navbar-toggler" type="button" aria-label="Menu openen" onclick="document.getElementById('navLinks').classList.toggle('show');">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="nav-links navbar-nav ms-auto" id="navLinks">
+            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="producten.php">Producten</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Prijzen</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+            <li class="nav-item d-flex align-items-center">
+                <a href="cart.php" class="nav-link p-0 me-2">
+                    <button class="cart-btn" id="cartBtn" style="background: none; border: none; position: relative;">
+                        <i class="bi bi-cart" style="font-size: 1.7rem;"></i>
+                        <span id="cartCount" style="position: absolute; top: -6px; right: -8px; background: #bfa046; color: #fff; border-radius: 50%; font-size: 0.85rem; padding: 2px 7px; min-width: 22px; text-align: center;">0</span>
+                    </button>
+                </a>
+                <button class="reserveren ms-2" onclick="location.href='reserveren.php'">Reserveren</button>
             </li>
         </ul>
-        </nav>
-    </header>
-    <style>
-            * {
+    </nav>
+</header>
+<style>
+    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -36,33 +42,32 @@
     }
 
     .header {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 1200px;
-    border-radius: 16px;
-    backdrop-filter: blur(12px);
-    background-color: rgba(255, 255, 255, 0.6);
-    transition: all 0.4s ease;
-    z-index: 1000;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    animation: fadeInDown 0.8s ease forwards;
-    animation-delay: 0.2s;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 1200px;
+        border-radius: 16px;
+        backdrop-filter: blur(12px);
+        background-color: rgba(255, 255, 255, 0.6);
+        transition: all 0.4s ease;
+        z-index: 1000;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        animation: fadeInDown 0.8s ease forwards;
+        animation-delay: 0.2s;
     }
-
     .logo {
-    width: 70px;
-    height: 70px;
+        width: 70px;
+        height: 70px;
     }
     .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1rem;
-    transition: all 0.4s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1rem;
+        transition: all 0.4s ease;
     }
 
     .nav.shrink {
@@ -100,55 +105,44 @@
     }
     }
     .nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-left: auto;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-left: auto;
+        transition: all 0.3s;
     }
 
-    .nav-links li:last-child {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
+    .nav-links .nav-item {
+        display: flex;
+        align-items: center;
     }
 
-    .reserveren {
-    margin-left: 0;
-    float: none;
-    }
-    .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 3rem;
-    transition: all 0.4s ease;
+    .nav-links .nav-link {
+        text-decoration: none;
+        color: #000;
+        font-weight: 500;
+        position: relative;
+        transition: color 0.3s ease;
+        padding: 0.5rem 0.8rem;
     }
 
-    .nav-links a {
-    text-decoration: none;
-    color: #000;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.3s ease;
+    .nav-links .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: #000;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
     }
 
-    .nav-links a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 100%;
-    height: 2px;
-    background: #000;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+    .nav-links .nav-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
     }
 
     .reserveren {
@@ -163,7 +157,6 @@
         position: relative;
         overflow: hidden;
         transition: all 0.4s ease;
-        float: right;
         margin-left: 20px;
     }
 
@@ -189,41 +182,71 @@
         font-size: 100%;
     }
 
-    .hero {
-    height: 100vh;
-    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 0;
-    margin-top: 0;
+    .navbar-toggler {
+        border: none;
+        background: none;
+        font-size: 2rem;
+        display: none;
     }
 
-    .content {
-    padding: 4rem;
+    .navbar-toggler-icon {
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        vertical-align: middle;
+        background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") center/contain no-repeat;
     }
-        </style>
 
-        <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    @media (max-width: 991px) {
+        .nav-links {
+            flex-direction: column;
+            align-items: flex-start;
+            background: rgba(255,255,255,0.97);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            display: none;
+        }
+        .nav-links.show {
+            display: flex;
+        }
+        .navbar-toggler {
+            display: block;
+        }
+        .nav {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
     let lastScrollTop = 0;
     const nav = document.querySelector('.nav');
     const header = document.querySelector('.header');
-
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
         if (scrollTop > lastScrollTop + 10) {
-        // Scroll naar beneden
-        nav.classList.add('shrink');
-        header.classList.add('shrink');
+            nav.classList.add('shrink');
+            header.classList.add('shrink');
         } else if (scrollTop < lastScrollTop - 10 || scrollTop <= 0) {
-        // Scroll naar boven
-        nav.classList.remove('shrink');
-        header.classList.remove('shrink');
+            nav.classList.remove('shrink');
+            header.classList.remove('shrink');
         }
-
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
+    // Sluit menu bij klik buiten menu op mobiel
+    document.addEventListener('click', function(e) {
+        const navLinks = document.getElementById('navLinks');
+        const toggler = document.querySelector('.navbar-toggler');
+        if (window.innerWidth < 992 && navLinks.classList.contains('show')) {
+            if (!navLinks.contains(e.target) && !toggler.contains(e.target)) {
+                navLinks.classList.remove('show');
+            }
+        }
     });
-    </script>
+});
+</script>
