@@ -129,7 +129,82 @@
     max-width: 98vw;
   }
 }
-</style>
+
+.openingstijden-container {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(191,160,70,0.10);
+  max-width: 420px;
+  margin: 2.5rem auto 2rem auto;
+  padding: 2.2rem 2rem 1.5rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.openingstijden-title {
+  color: #bfa046;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+.openingstijden-tabel {
+  width: 100%;
+  margin: 0 auto 1.2rem auto;
+  border-collapse: separate;
+  border-spacing: 0 0.3rem;
+  font-size: 1.08rem;
+}
+.openingstijden-tabel td {
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  background: #f8f6f2;
+  color: #222;
+}
+.openingstijden-tabel tr td:first-child {
+  font-weight: 600;
+  text-align: left;
+  background: #fffbe9;
+}
+.openingstijden-tabel .gesloten {
+  color: #fff;
+  background: #bfa046;
+  font-weight: 700;
+  text-align: center;
+}
+.openingstijden-tabel .avond {
+  background: #bfa046;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.95em;
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+.openingstijden-bar-tip {
+  margin-top: 1.2rem;
+  color: #bfa046;
+  font-size: 1.08rem;
+  background: #fffbe9;
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+@media (max-width: 600px) {
+  .openingstijden-container {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    max-width: 99vw;
+  }
+  .openingstijden-title {
+    font-size: 1.3rem;
+  }
+}
+  </style>
 </head>
 <body>
 <?php
@@ -238,7 +313,7 @@ include 'header.php';
           </tbody>
         </table>
         <div class="openingstijden-bar-tip">
-          <i class="bi bi-cup-straw"></i> Onze bar is tijdens openingstijden geopend voor koffie, thee en fris!
+          <i class="bi bi-cup-straw"></i> Onze bar is tijdens openingstijden geopend voor koffie, thee, fris en een lekkere alcoholische versnapering !
         </div>
       </div>
     </section>
