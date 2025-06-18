@@ -389,31 +389,31 @@ $top3 = $pdo->query("
       <div class="container">
         <div class="row">
           <?php foreach($top3 as $product): ?>
-            <div class="col-md-4 mb-4">
-              <div class="card h-100 w-100" data-product-id="<?= $product['id'] ?>">
-                <div class="img-hover-wrapper" style="height:220px;">
-                  <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
-                  <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
-                </div>
-                <div class="card-footer">
-                  <?php if (!empty($product['korting'])): ?>
-                    <span class="text-decoration-line-through text-muted">€<?= number_format($product['prijs'], 2, ',', '.') ?></span>
-                    <strong class="ms-2 text-success">
-                      €<?= number_format($product['prijs'] - $product['korting'], 2, ',', '.') ?>
-                    </strong>
-                    <span class="badge bg-success ms-2">Korting!</span>
-                  <?php else: ?>
-                    <strong>€<?= number_format($product['prijs'], 2, ',', '.') ?></strong>
-                  <?php endif; ?>
-                </div>
-                <button class="btn add-to-cart-btn" style="background-color: rgba(80,80,80,0.7); color: #fff; border: none;">
-                  <i class="bi bi-cart-plus"></i> Add to cart
-                </button>
+              <div class="col-md-4 mb-4">
+                  <div class="card h-100" data-product-id="<?= $product['id'] ?>">
+                      <div class="img-hover-wrapper">
+                          <img src="<?= htmlspecialchars($product['afbeelding']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['naam']) ?>">
+                      </div>
+                      <div class="card-body">
+                          <h5 class="card-title"><?= htmlspecialchars($product['naam']) ?></h5>
+                          <p class="card-text"><?= htmlspecialchars($product['beschrijving']) ?></p>
+                      </div>
+                      <div class="card-footer">
+                          <?php if (!empty($product['korting'])): ?>
+                              <span class="text-decoration-line-through text-muted">€<?= number_format($product['prijs'], 2, ',', '.') ?></span>
+                              <strong class="ms-2 text-success">
+                                  €<?= number_format($product['prijs'] - $product['korting'], 2, ',', '.') ?>
+                              </strong>
+                              <span class="badge bg-success ms-2">Korting!</span>
+                          <?php else: ?>
+                              <strong>€<?= number_format($product['prijs'], 2, ',', '.') ?></strong>
+                          <?php endif; ?>
+                      </div>
+                      <button class="btn  add-to-cart-btn" style="background-color: rgba(80,80,80,0.7); COLOR: #fff; border: none;">
+                          <i class="bi bi-cart-plus"></i> Add to cart
+                      </button>
+                  </div>
               </div>
-            </div>
           <?php endforeach; ?>
         </div>
       </div>
