@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Knip Knap Kappers - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
 <!-- Services Boxes CSS -->
@@ -207,8 +208,7 @@
 
   /* Product Card Styling - exact als producten.php */
     #top-producten .row {
-        display: flex;
-        flex-wrap: wrap;
+
         align-items: stretch;
     }
 
@@ -218,11 +218,11 @@
         height: 100%;
         position: relative;
         transition: transform 0.2s, box-shadow 0.2s;
-        overflow: visible;
+        overflow: visible; /* belangrijk voor zweven */
     }
     #top-producten .img-hover-wrapper {
         position: relative;
-        height: 220px;
+        height: 220px; /* zelfde als max-height afbeelding */
         width: 100%;
         overflow: visible;
         z-index: 1;
@@ -240,6 +240,7 @@
         background: none;
     }
     #top-producten .card.h-100:hover .img-hover-wrapper .card-img-top {
+        /* Alleen vergroten, niet verplaatsen */
         transform: scale(1.08);
         z-index: 20;
         background: none;
@@ -264,7 +265,7 @@
         inset: 0;
         width: 100%;
         height: 100%;
-        background: rgba(80,80,80,0.7);
+        background: rgba(80,80,80,0.7); /* grijs en doorzichtig */
         color: #fff;
         border: none;
         border-radius: 0 0 0.5rem 0.5rem;
