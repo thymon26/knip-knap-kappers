@@ -227,6 +227,11 @@
         }
         .navbar-toggler {
             display: block;
+            font-size: 1.3rem; /* eventueel aanpassen */
+        }
+        .navbar-toggler-icon {
+            width: 1.5em;
+            height: 1.5em;
         }
         .nav {
             flex-wrap: wrap;
