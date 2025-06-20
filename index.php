@@ -13,6 +13,9 @@
       background: #fcfaf6;
       font-family: Arial, sans-serif;
     }
+    section{
+      background: #fcfaf6;
+    }
     .banner{
       background-image: url("assets/product/ideetje2\ -\ Copy.jpg");
       perspective: 100px;
