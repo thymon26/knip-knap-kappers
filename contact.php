@@ -42,7 +42,11 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Verzenden</button>
                 </form>
-                <div id="formMessage"></div>
+                <?php if ($mailSuccess): ?>
+                    <div class="alert alert-success">Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.</div>
+                <?php elseif ($mailError): ?>
+                    <div class="alert alert-danger"><?= htmlspecialchars($mailError) ?></div>
+                <?php endif; ?>
                 <h2 class="mt-5">Waar vind je ons?</h2>
                 <p>Onze kapperszaak is gevestigd in Aventus, Apeldoorn:</p>
                 <address>
@@ -58,13 +62,7 @@
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('formMessage').innerHTML = "<div class='alert alert-success'>Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.</div>";
-            this.reset();
-        });
-    </script>
+
     <?php include 'footer.php'; ?>
     <?php
 use PHPMailer\PHPMailer\PHPMailer;
