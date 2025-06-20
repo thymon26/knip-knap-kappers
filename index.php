@@ -9,13 +9,17 @@
 
 <!-- Services Boxes CSS -->
   <style>
-    body {
-      background: #fcfaf6;
-      font-family: Arial, sans-serif;
-    }
-    section{
-      background: #fcfaf6;
-    }
+html, body {
+  background: #fcfaf6 !important;
+}
+section,
+main,
+.container,
+.openingstijden-container,
+.hero,
+.hero-content {
+  background: #fcfaf6 !important;
+}
     .banner{
       background-image: url("assets/product/ideetje2\ -\ Copy.jpg");
       perspective: 100px;
