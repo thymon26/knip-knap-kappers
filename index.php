@@ -120,7 +120,7 @@ main,
     z-index: 1;
     padding-top: 80px;
     padding-bottom: 60px;
-    background: url('assets/background.png') center center/cover no-repeat;
+    background: url('assets/background.png') center center/cover no-repeat !important;
   }
   .hero::before {
     content: "";
