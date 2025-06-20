@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $adres = "$straat $huisnummer $toevoeging, $postcode $woonplaats";
 
         // Maak order-overzicht
+        $totaal = 0;
         $orderHtml = '
 <div style="background:#fcfaf6;padding:32px 0;">
   <div style="max-width:520px;margin:0 auto;background:#fffbe9;border-radius:18px;box-shadow:0 4px 24px rgba(191,160,70,0.10);padding:32px 28px 24px 28px;font-family:sans-serif;">

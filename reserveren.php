@@ -122,6 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 </div>
 ';
+                        $mail->AltBody = 'Beste ' . htmlspecialchars($naam) . ', je reservering is bevestigd voor ' . date('d-m-Y', strtotime($datum)) . ' om ' . htmlspecialchars($tijd) . '. Behandeling: ' . htmlspecialchars($service) . '. Spaar met onze stempelkaart voor een gratis knipbeurt!';
+                        $mail->send();
+                        $success = true;
                     } catch (Exception $e) {
                         $error = "Reservering opgeslagen, maar mail kon niet worden verstuurd: {$mail->ErrorInfo}";
                     }
@@ -191,6 +194,7 @@ $services = [
 </head>
 <body>
 <?php include 'header.php'; ?>
+<br><br><br><br><br><br><br><br>
 <div class="reserveren-container">
     <h1 class="mb-4">Afspraak maken</h1>
     <?php if ($success): ?>
