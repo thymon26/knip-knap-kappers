@@ -17,6 +17,8 @@
             box-shadow: 0 1px 4px rgba(0,0,0,0.10);
         }
     </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -40,12 +42,14 @@
                         <label for="bericht" class="form-label">Bericht</label>
                         <textarea class="form-control" id="bericht" name="bericht" rows="5" required></textarea>
                     </div>
+                    <div class="g-recaptcha mb-3" data-sitekey="6Lfee0grAAAAAPLc4dQycwoKSm_dtmjfCDdcMcjf"></div>
                     <button type="submit" class="btn btn-primary">Verzenden</button>
+                    <?php if ($mailError): ?>
+                        <div class="alert alert-danger mt-2"><?= htmlspecialchars($mailError) ?></div>
+                    <?php endif; ?>
                 </form>
                 <?php if ($mailSuccess): ?>
                     <div class="alert alert-success">Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.</div>
-                <?php elseif ($mailError): ?>
-                    <div class="alert alert-danger"><?= htmlspecialchars($mailError) ?></div>
                 <?php endif; ?>
                 <h2 class="mt-5">Waar vind je ons?</h2>
                 <p>Onze kapperszaak is gevestigd in Aventus, Apeldoorn:</p>
@@ -74,15 +78,46 @@ require 'phpmailer/src/Exception.php';
 
 $mailSuccess = false;
 $mailError = '';
+$recaptchaError = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $naam = trim($_POST['naam'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $bericht = trim($_POST['bericht'] ?? '');
 
-    if ($naam && $email && $bericht && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $mail = new PHPMailer(true);
+    // --- reCAPTCHA controle ---
+    $recaptchaSecret = '6Lfee0grAAAAAL27Iq5DxwBFI0I2BYUpZYGXkFqv'; // jouw geheime sleutel
+    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+
+    if (empty($recaptchaResponse)) {
+        $recaptchaError = 'Bevestig dat je geen robot bent.';
+    } else {
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $data = [
+            'secret' => $recaptchaSecret,
+            'response' => $recaptchaResponse,
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ];
+
+        // Gebruik cURL voor de POST
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $result = json_decode($response, true);
+
+        if (!isset($result['success']) || $result['success'] !== true) {
+            $recaptchaError = 'Bevestig dat je geen robot bent.';
+        }
+    }
+    // --- EINDE reCAPTCHA controle ---
+
+    if ($naam && $email && $bericht && filter_var($email, FILTER_VALIDATE_EMAIL) && !$recaptchaError) {
         try {
-            // SMTP instellingen (zoals in checkout.php)
+            // 1. Mail naar info@badeendensoep.nl
+            $mail = new PHPMailer(true);
             $mail->isSMTP();
             $mail->Host       = 'webreus.email';
             $mail->SMTPAuth   = true;
@@ -92,18 +127,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Port       = 587;
 
             $mail->setFrom('noreply@badeendensoep.nl', 'Knip Knap Kappers');
-            $mail->addAddress($email, $naam); // Naar de invuller
-            $mail->addAddress('info@badeendensoep.nl', 'Knip Knap Kappers'); // Naar jezelf
+            $mail->addAddress('info@badeendensoep.nl', 'Knip Knap Kappers');
             $mail->addReplyTo($email, $naam);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Contactformulier Knip Knap Kappers';
+            $mail->Subject = 'Nieuw contactformulier via de website';
             $mail->Body = '
                 <div style="background:#fcfaf6;padding:32px 0;">
                   <div style="max-width:520px;margin:0 auto;background:#fffbe9;border-radius:18px;box-shadow:0 4px 24px rgba(191,160,70,0.10);padding:32px 28px 24px 28px;font-family:sans-serif;">
                     <div style="text-align:center;margin-bottom:18px;">
                       <img src="https://barber.badeendensoep.nl/assets/logo.png" alt="Contact" style="width:44px;height:44px;opacity:0.8;">
-                      <h2 style="color:#bfa046;font-size:1.3rem;margin:12px 0 0 0;font-weight:800;">Contactformulier</h2>
+                      <h2 style="color:#bfa046;font-size:1.3rem;margin:12px 0 0 0;font-weight:800;">Nieuw contactformulier</h2>
                     </div>
                     <p style="font-size:1.08rem;color:#222;margin-bottom:18px;">
                       <b>Naam:</b> ' . htmlspecialchars($naam) . '<br>
@@ -121,10 +155,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ';
             $mail->AltBody = "Naam: $naam\nE-mail: $email\nBericht:\n$bericht";
             $mail->send();
+
+            // 2. Bevestiging naar de verzender
+            $bevestig = new PHPMailer(true);
+            $bevestig->isSMTP();
+            $bevestig->Host       = 'webreus.email';
+            $bevestig->SMTPAuth   = true;
+            $bevestig->Username   = 'noreply@badeendensoep.nl';
+            $bevestig->Password   = 'Thym3n2oo8!';
+            $bevestig->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $bevestig->Port       = 587;
+
+            $bevestig->setFrom('noreply@badeendensoep.nl', 'Knip Knap Kappers');
+            $bevestig->addAddress($email, $naam);
+            $bevestig->addReplyTo('info@badeendensoep.nl', 'Knip Knap Kappers');
+
+            $bevestig->isHTML(true);
+            $bevestig->Subject = 'Bedankt voor je bericht aan Knip Knap Kappers';
+            $bevestig->Body = '
+                <div style="background:#fcfaf6;padding:32px 0;">
+                  <div style="max-width:520px;margin:0 auto;background:#fffbe9;border-radius:18px;box-shadow:0 4px 24px rgba(191,160,70,0.10);padding:32px 28px 24px 28px;font-family:sans-serif;">
+                    <div style="text-align:center;margin-bottom:18px;">
+                      <img src="https://barber.badeendensoep.nl/assets/logo.png" alt="Contact" style="width:44px;height:44px;opacity:0.8;">
+                      <h2 style="color:#bfa046;font-size:1.3rem;margin:12px 0 0 0;font-weight:800;">Bedankt voor je bericht!</h2>
+                    </div>
+                    <p style="font-size:1.08rem;color:#222;margin-bottom:18px;">
+                      Beste ' . htmlspecialchars($naam) . ',<br>
+                      Bedankt voor je bericht aan Knip Knap Kappers.<br>
+                      We nemen zo snel mogelijk contact met je op.<br><br>
+                      <b>Je bericht:</b>
+                    </p>
+                    <div style="background:#fffde7;border-radius:10px;padding:12px 16px;margin-bottom:18px;">
+                      <span style="color:#444;">' . nl2br(htmlspecialchars($bericht)) . '</span>
+                    </div>
+                    <div style="text-align:center;color:#bbb;font-size:0.97rem;margin-top:18px;">
+                      &copy; ' . date('Y') . ' Knip Knap Kappers
+                    </div>
+                  </div>
+                </div>
+            ';
+            $bevestig->AltBody = "Beste $naam,\n\nBedankt voor je bericht aan Knip Knap Kappers. We nemen zo snel mogelijk contact met je op.\n\nJe bericht:\n$bericht";
+            $bevestig->send();
+
             $mailSuccess = true;
         } catch (Exception $e) {
             $mailError = "Er ging iets mis met het versturen van je bericht. Probeer het later opnieuw.";
         }
+    } elseif ($recaptchaError) {
+        $mailError = $recaptchaError;
     } else {
         $mailError = "Vul alle velden correct in.";
     }
