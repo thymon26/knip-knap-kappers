@@ -18,17 +18,22 @@
         }
     </style>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <?php include 'header.php'; ?>
         <br><br><br><br><br><br><br><br>
 
-    <div class="container my-5">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <h1 class="mb-4">Contact opnemen met Kapperszaak Aventus Apeldoorn</h1>
                 <p>Heb je vragen of wil je een afspraak maken? Vul het formulier in en wij nemen zo snel mogelijk contact met je op!</p>
+                <?php if (!empty($mailSuccess)): ?>
+                    <div class="alert alert-success">Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.</div>
+                <?php elseif (!empty($mailError)): ?>
+                    <div class="alert alert-danger"><?= htmlspecialchars($mailError) ?></div>
+                <?php endif; ?>
                 <form id="contactForm" class="mb-4 p-4 bg-white rounded shadow-sm" method="POST" action="">
                     <div class="mb-3">
                         <label for="naam" class="form-label">Naam</label>
