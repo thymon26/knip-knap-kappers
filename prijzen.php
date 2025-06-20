@@ -86,5 +86,6 @@ $services = $pdo->query("SELECT * FROM services WHERE actief = 1 ORDER BY id ASC
         <?php endforeach; ?>
     </div>
 </div>
+<?php include 'footer.php'; ?>
 </body>
 </html>

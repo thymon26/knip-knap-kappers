@@ -624,5 +624,6 @@ document.querySelectorAll('#top-producten .add-to-cart-btn').forEach((btn, idx) 
     });
 });
 </script>
+<?php include 'footer.php'; ?>
 </body>
 </html>
