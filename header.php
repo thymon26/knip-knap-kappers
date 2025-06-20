@@ -198,6 +198,17 @@
     }
 
     @media (max-width: 991px) {
+        .nav {
+            padding: 0.5rem 0.7rem;
+        }
+        .logo {
+            width: 48px;
+            height: 48px;
+        }
+        .header {
+            top: 8px;
+            border-radius: 10px;
+        }
         .nav-links {
             flex-direction: column;
             align-items: flex-start;
