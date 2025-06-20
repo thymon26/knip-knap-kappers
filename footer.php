@@ -1,4 +1,4 @@
-<footer class="footer mt-auto py-3" style="background:#fffbe9;">
+<footer class="footer mt-auto py-3" >
   <div class="container text-center">
     <div class="mb-2">
       <a href="index.php" class="me-3 text-decoration-none text-dark fw-bold">Home</a>
