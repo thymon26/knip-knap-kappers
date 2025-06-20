@@ -64,28 +64,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $adres = "$straat $huisnummer $toevoeging, $postcode $woonplaats";
 
         // Maak order-overzicht
-        $orderHtml = "<h2>Bestelbevestiging</h2>";
-        $orderHtml .= "<p>Bedankt voor je bestelling, $naam!</p>";
-        $orderHtml .= "<p><strong>Adres:</strong> " . htmlspecialchars($adres) . "</p>";
-        $orderHtml .= "<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;'>";
-        $orderHtml .= "<tr><th>Afbeelding</th><th>Product</th><th>Aantal</th><th>Prijs</th><th>Totaal</th></tr>";
-        $totaal = 0;
+        $orderHtml = '
+<div style="background:#fcfaf6;padding:32px 0;">
+  <div style="max-width:520px;margin:0 auto;background:#fffbe9;border-radius:18px;box-shadow:0 4px 24px rgba(191,160,70,0.10);padding:32px 28px 24px 28px;font-family:sans-serif;">
+    <div style="text-align:center;margin-bottom:18px;">
+      <img src="https://cdn.jsdelivr.net/gh/twbs/icons@1.11.3/icons/scissors.svg" alt="Knip Knap Kappers" style="width:48px;height:48px;opacity:0.8;">
+      <h2 style="color:#bfa046;font-size:1.5rem;margin:12px 0 0 0;font-weight:800;">Bestelbevestiging</h2>
+    </div>
+    <p style="font-size:1.08rem;color:#222;margin-bottom:18px;">
+      Bedankt voor je bestelling, <b>' . htmlspecialchars($naam) . '</b>!<br>
+      We gaan direct voor je aan de slag.
+    </p>
+    <div style="background:#fffde7;border-radius:10px;padding:12px 16px;margin-bottom:18px;">
+      <span style="color:#bfa046;font-weight:600;">Adres:</span><br>
+      <span style="color:#444;">' . htmlspecialchars($adres) . '</span>
+    </div>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:18px;">
+      <thead>
+        <tr style="background:#f3e7c1;color:#bfa046;">
+          <th style="padding:8px 4px;font-size:1rem;border-radius:8px 0 0 0;">Product</th>
+          <th style="padding:8px 4px;font-size:1rem;">Aantal</th>
+          <th style="padding:8px 4px;font-size:1rem;">Prijs</th>
+          <th style="padding:8px 4px;font-size:1rem;border-radius:0 8px 0 0;">Totaal</th>
+        </tr>
+      </thead>
+      <tbody>
+';
         foreach ($cart as $item) {
             $prijs = floatval(str_replace([',', '€'], ['.', ''], $item['prijs']));
             $subtotaal = $prijs * $item['qty'];
             $totaal += $subtotaal;
             $afbeelding = isset($item['afbeelding']) ? '' . htmlspecialchars($item['afbeelding']) : '';
-            $imgHtml = $afbeelding ? "<img src=\"$afbeelding\" alt=\"".htmlspecialchars($item['naam'])."\" style=\"max-width:60px;max-height:60px;\">" : '';
-            $orderHtml .= "<tr>";
-            $orderHtml .= "<td style=\"text-align:center;\">$imgHtml</td>";
-            $orderHtml .= "<td>" . htmlspecialchars($item['naam']) . "</td>";
-            $orderHtml .= "<td>" . (int)$item['qty'] . "</td>";
-            $orderHtml .= "<td>€" . number_format($prijs, 2, ',', '.') . "</td>";
-            $orderHtml .= "<td>€" . number_format($subtotaal, 2, ',', '.') . "</td>";
-            $orderHtml .= "</tr>";
+            $imgHtml = $afbeelding ? "<img src=\"$afbeelding\" alt=\"".htmlspecialchars($item['naam'])."\" style=\"max-width:38px;max-height:38px;border-radius:7px;margin-right:7px;vertical-align:middle;\">" : '';
+            $orderHtml .= "<tr style=\"background:#fff;\">
+        <td style=\"padding:7px 4px;border-bottom:1px solid #f3e7c1;text-align:left;\">$imgHtml" . htmlspecialchars($item['naam']) . "</td>
+        <td style=\"padding:7px 4px;border-bottom:1px solid #f3e7c1;text-align:center;\">" . (int)$item['qty'] . "</td>
+        <td style=\"padding:7px 4px;border-bottom:1px solid #f3e7c1;text-align:right;\">€" . number_format($prijs, 2, ',', '.') . "</td>
+        <td style=\"padding:7px 4px;border-bottom:1px solid #f3e7c1;text-align:right;\">€" . number_format($subtotaal, 2, ',', '.') . "</td>
+    </tr>";
         }
-        $orderHtml .= "<tr><th colspan='4' style='text-align:right;'>Totaal</th><th>€" . number_format($totaal, 2, ',', '.') . "</th></tr>";
-        $orderHtml .= "</table>";
+        $orderHtml .= '
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align:right;padding:10px 4px 0 4px;font-weight:700;color:#bfa046;font-size:1.08rem;border:none;">Totaal</td>
+          <td style="text-align:right;padding:10px 4px 0 4px;font-weight:700;color:#bfa046;font-size:1.08rem;border:none;">€' . number_format($totaal, 2, ',', '.') . '</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div style="background:#fffde7;border-radius:10px;padding:10px 14px;text-align:center;color:#bfa046;font-size:1.04rem;margin-bottom:10px;">
+      <i style="font-size:1.2rem;vertical-align:-2px;">&#x1F3C6;</i>
+      Spaar met onze stempelkaart voor een gratis knipbeurt!
+    </div>
+    <div style="text-align:center;color:#bbb;font-size:0.97rem;margin-top:18px;">
+      &copy; ' . date('Y') . ' Knip Knap Kappers
+    </div>
+  </div>
+</div>
+';
 
         // Verstuur mail
         $mail = new PHPMailer(true);

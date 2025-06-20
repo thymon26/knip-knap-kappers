@@ -93,12 +93,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mail->addAddress($email, $naam);
                         $mail->isHTML(true);
                         $mail->Subject = 'Bevestiging van je reservering bij Knip Knap Kappers';
-                        $mail->Body    = "<h2>Reserveringsbevestiging</h2>
-                        <p>Beste $naam,</p>
-                        <p>Je reservering is bevestigd voor <strong>" . date('d-m-Y', strtotime($datum)) . "</strong> om <strong>$tijd</strong>.</p>
-                        <p><strong>Behandeling:</strong> " . htmlspecialchars($service) . "</p>
-                        <p>We zien je graag bij Knip Knap Kappers!</p>";
-                        $mail->send();
+                        $mail->Body = '
+<div style="background:#fcfaf6;padding:32px 0;">
+  <div style="max-width:520px;margin:0 auto;background:#fffbe9;border-radius:18px;box-shadow:0 4px 24px rgba(191,160,70,0.10);padding:32px 28px 24px 28px;font-family:sans-serif;">
+    <div style="text-align:center;margin-bottom:18px;">
+      <img src="https://cdn.jsdelivr.net/gh/twbs/icons@1.11.3/icons/scissors.svg" alt="Knip Knap Kappers" style="width:48px;height:48px;opacity:0.8;">
+      <h2 style="color:#bfa046;font-size:1.5rem;margin:12px 0 0 0;font-weight:800;">Reserveringsbevestiging</h2>
+    </div>
+    <p style="font-size:1.08rem;color:#222;margin-bottom:18px;">
+      Beste <b>' . htmlspecialchars($naam) . '</b>,<br>
+      Je reservering is bevestigd!
+    </p>
+    <div style="background:#fffde7;border-radius:10px;padding:12px 16px;margin-bottom:18px;">
+      <span style="color:#bfa046;font-weight:600;">Afspraakgegevens:</span><br>
+      <span style="color:#444;">
+        <b>Datum:</b> ' . date('d-m-Y', strtotime($datum)) . '<br>
+        <b>Tijd:</b> ' . htmlspecialchars($tijd) . '<br>
+        <b>Behandeling:</b> ' . htmlspecialchars($service) . '
+      </span>
+    </div>
+    <div style="background:#fffde7;border-radius:10px;padding:10px 14px;text-align:center;color:#bfa046;font-size:1.04rem;margin-bottom:10px;">
+      <i style="font-size:1.2rem;vertical-align:-2px;">&#x1F3C6;</i>
+      Spaar met onze stempelkaart voor een gratis knipbeurt!
+    </div>
+    <div style="text-align:center;color:#bbb;font-size:0.97rem;margin-top:18px;">
+      &copy; ' . date('Y') . ' Knip Knap Kappers
+    </div>
+  </div>
+</div>
+';
                     } catch (Exception $e) {
                         $error = "Reservering opgeslagen, maar mail kon niet worden verstuurd: {$mail->ErrorInfo}";
                     }
