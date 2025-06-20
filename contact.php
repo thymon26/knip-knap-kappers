@@ -27,7 +27,7 @@
             <div class="col-lg-8">
                 <h1 class="mb-4">Contact opnemen met Kapperszaak Aventus Apeldoorn</h1>
                 <p>Heb je vragen of wil je een afspraak maken? Vul het formulier in en wij nemen zo snel mogelijk contact met je op!</p>
-                <form id="contactForm" class="mb-4 p-4 bg-white rounded shadow-sm">
+                <form id="contactForm" class="mb-4 p-4 bg-white rounded shadow-sm" method="POST" action="">
                     <div class="mb-3">
                         <label for="naam" class="form-label">Naam</label>
                         <input type="text" class="form-control" id="naam" name="naam" required>
@@ -66,5 +66,71 @@
         });
     </script>
     <?php include 'footer.php'; ?>
+    <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+require 'phpmailer/src/Exception.php';
+
+$mailSuccess = false;
+$mailError = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $naam = trim($_POST['naam'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $bericht = trim($_POST['bericht'] ?? '');
+
+    if ($naam && $email && $bericht && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $mail = new PHPMailer(true);
+        try {
+            // SMTP instellingen (zoals in checkout.php)
+            $mail->isSMTP();
+            $mail->Host       = 'webreus.email';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'noreply@badeendensoep.nl';
+            $mail->Password   = 'Thym3n2oo8!';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+
+            $mail->setFrom('noreply@badeendensoep.nl', 'Knip Knap Kappers');
+            $mail->addAddress($email, $naam); // Naar de invuller
+            $mail->addAddress('info@badeendensoep.nl', 'Knip Knap Kappers'); // Naar jezelf
+            $mail->addReplyTo($email, $naam);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Contactformulier Knip Knap Kappers';
+            $mail->Body = '
+                <div style="background:#fcfaf6;padding:32px 0;">
+                  <div style="max-width:520px;margin:0 auto;background:#fffbe9;border-radius:18px;box-shadow:0 4px 24px rgba(191,160,70,0.10);padding:32px 28px 24px 28px;font-family:sans-serif;">
+                    <div style="text-align:center;margin-bottom:18px;">
+                      <img src="https://barber.badeendensoep.nl/assets/logo.png" alt="Contact" style="width:44px;height:44px;opacity:0.8;">
+                      <h2 style="color:#bfa046;font-size:1.3rem;margin:12px 0 0 0;font-weight:800;">Contactformulier</h2>
+                    </div>
+                    <p style="font-size:1.08rem;color:#222;margin-bottom:18px;">
+                      <b>Naam:</b> ' . htmlspecialchars($naam) . '<br>
+                      <b>E-mail:</b> ' . htmlspecialchars($email) . '
+                    </p>
+                    <div style="background:#fffde7;border-radius:10px;padding:12px 16px;margin-bottom:18px;">
+                      <span style="color:#bfa046;font-weight:600;">Bericht:</span><br>
+                      <span style="color:#444;">' . nl2br(htmlspecialchars($bericht)) . '</span>
+                    </div>
+                    <div style="text-align:center;color:#bbb;font-size:0.97rem;margin-top:18px;">
+                      &copy; ' . date('Y') . ' Knip Knap Kappers
+                    </div>
+                  </div>
+                </div>
+            ';
+            $mail->AltBody = "Naam: $naam\nE-mail: $email\nBericht:\n$bericht";
+            $mail->send();
+            $mailSuccess = true;
+        } catch (Exception $e) {
+            $mailError = "Er ging iets mis met het versturen van je bericht. Probeer het later opnieuw.";
+        }
+    } else {
+        $mailError = "Vul alle velden correct in.";
+    }
+}
+?>
 </body>
 </html>
