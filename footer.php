@@ -3,8 +3,9 @@
     <div class="mb-2">
       <a href="index.php" class="me-3 text-decoration-none text-dark fw-bold">Home</a>
       <a href="prijzen.php" class="me-3 text-decoration-none text-dark">Prijzen</a>
-      <a href="#gallerij" class="me-3 text-decoration-none text-dark">Gallerij</a>
-      <a href="#contact" class="text-decoration-none text-dark">Contact</a>
+      <a href="contact.php" class="text-decoration-none text-dark">Contact</a>
+      <a href="reserveren.php" class="ms-3 text-decoration-none text-dark">Reserveren</a>
+      <a href="producten.php" class="ms-3 text-decoration-none text-dark">
     </div>
     <div style="color:#bfa046; font-size:1.05rem;">
       &copy; <?= date('Y') ?> Knip Knap Kappers &middot; Alle rechten voorbehouden
