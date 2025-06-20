@@ -229,10 +229,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop + 10) {
-            nav.classList.add('shrink');
-            header.classList.add('shrink');
-        } else if (scrollTop < lastScrollTop - 10 || scrollTop <= 0) {
+        // Alleen shrink op desktop (breder dan 991px)
+        if (window.innerWidth > 991) {
+            if (scrollTop > lastScrollTop + 10) {
+                nav.classList.add('shrink');
+                header.classList.add('shrink');
+            } else if (scrollTop < lastScrollTop - 10 || scrollTop <= 0) {
+                nav.classList.remove('shrink');
+                header.classList.remove('shrink');
+            }
+        } else {
+            // Op mobiel altijd groot
             nav.classList.remove('shrink');
             header.classList.remove('shrink');
         }

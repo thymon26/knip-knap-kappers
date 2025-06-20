@@ -313,6 +313,7 @@
 // Include header file 
 include 'header.php';
 ?>
+<br>
 <?php
 require_once 'db.php';
 $services = $pdo->query("SELECT * FROM services WHERE actief = 1 ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
