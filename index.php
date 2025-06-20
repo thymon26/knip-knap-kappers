@@ -19,7 +19,7 @@ main,
   background: #fcfaf6 !important;
 }
     .banner{
-      background-image: url("assets/product/ideetje2\ -\ Copy.jpg");
+      background-image: url("assets/product/ideetje2\ -\ Copy.jpg") !important;
       perspective: 100px;
       height: 100vh;
       overflow-x: hidden;
