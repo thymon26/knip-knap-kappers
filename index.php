@@ -15,9 +15,7 @@ html, body {
 section,
 main,
 .container,
-.openingstijden-container,
-.hero,
-.hero-content {
+.openingstijden-container{
   background: #fcfaf6 !important;
 }
     .banner{
