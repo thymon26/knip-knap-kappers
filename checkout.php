@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div style="background:#fcfaf6;padding:32px 0;">
   <div style="max-width:520px;margin:0 auto;background:#fffbe9;border-radius:18px;box-shadow:0 4px 24px rgba(191,160,70,0.10);padding:32px 28px 24px 28px;font-family:sans-serif;">
     <div style="text-align:center;margin-bottom:18px;">
-      <img src="https://cdn.jsdelivr.net/gh/twbs/icons@1.11.3/icons/scissors.svg" alt="Knip Knap Kappers" style="width:48px;height:48px;opacity:0.8;">
+      <img src="https://barber.badeendensoep.nl/assets/logo.png" alt="Knip Knap Kappers" style="width:48px;height:48px;opacity:0.8;">
       <h2 style="color:#bfa046;font-size:1.5rem;margin:12px 0 0 0;font-weight:800;">Bestelbevestiging</h2>
     </div>
     <p style="font-size:1.08rem;color:#222;margin-bottom:18px;">
