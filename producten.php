@@ -94,6 +94,7 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
     // Include header file
     include 'header.php';
   ?>
+    <br><br><br><br><br><br><br><br>
 
 <div class="container">
     <h1 class="mb-4">Onze Producten</h1>

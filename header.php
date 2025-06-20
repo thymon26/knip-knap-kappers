@@ -2,7 +2,7 @@
 <header class="header">
     <nav class="nav navbar navbar-expand-lg">
         <a class="navbar-brand d-flex align-items-center" href="index.php">
-            <img src="/Assets/logo.png" alt="Logo" class="logo me-2"/>
+            <img src="/assets/logo.png" alt="Logo" class="logo me-2"/>
         </a>
         <button class="navbar-toggler" type="button" aria-label="Menu openen" onclick="document.getElementById('navLinks').classList.toggle('show');">
             <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,6 @@
         </ul>
     </nav>
 </header>
-    <br><br><br><br><br><br><br><br>
 <style>
     * {
     margin: 0;
