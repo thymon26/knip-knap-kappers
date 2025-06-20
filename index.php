@@ -368,10 +368,40 @@ $top3 = $pdo->query("
     </div>
   </div>
 </section>
-    <section class="content">
-      <p>Gallerij</p>
-      <div style="height: 1000px;"></div>
-    </section>
+    <section class="content" id="gallerij">
+  <div class="container py-4">
+    <h2 style="text-align:center; color:#bfa046; font-weight:800; margin-bottom:1.5rem;">
+      <i class="bi bi-images"></i> Gallerij
+    </h2>
+    <div class="row g-3 justify-content-center">
+      <?php
+        $dir = __DIR__ . '/assets/gallerij/';
+        $webDir = 'assets/gallerij/';
+        $allowed = ['jpg','jpeg','png','gif','webp'];
+        $images = [];
+        if(is_dir($dir)) {
+          foreach(scandir($dir) as $file) {
+            $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            if(in_array($ext, $allowed)) {
+              $images[] = $file;
+            }
+          }
+        }
+        if(empty($images)): ?>
+          <div class="col-12 text-center text-muted">Nog geen foto's in de gallerij.</div>
+        <?php else:
+          foreach($images as $img): ?>
+            <div class="col-6 col-md-4 col-lg-3">
+              <a href="<?= $webDir . urlencode($img) ?>" target="_blank" class="gallery-thumb d-block mb-2">
+                <img src="<?= $webDir . urlencode($img) ?>" class="img-fluid rounded shadow-sm gallery-img" alt="Gallerij foto">
+              </a>
+            </div>
+          <?php endforeach;
+        endif;
+      ?>
+    </div>
+  </div>
+</section>
     <section class="content" id="top-producten">
       <h2 style="text-align:center; color:#bfa046; font-weight:700; margin-bottom:1.5rem;">
         <i class="bi bi-star-fill"></i> Top 3 Best Verkochte Producten
