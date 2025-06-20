@@ -189,13 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="g-recaptcha mb-3" data-sitekey="6Lfee0grAAAAAPLc4dQycwoKSm_dtmjfCDdcMcjf"></div>
                     <button type="submit" class="btn btn-primary">Verzenden</button>
-                    <?php if ($mailError): ?>
-                        <div class="alert alert-danger mt-2"><?= htmlspecialchars($mailError) ?></div>
-                    <?php endif; ?>
                 </form>
-                <?php if ($mailSuccess): ?>
-                    <div class="alert alert-success">Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.</div>
-                <?php endif; ?>
                 <h2 class="mt-5">Waar vind je ons?</h2>
                 <p>Onze kapperszaak is gevestigd in Aventus, Apeldoorn:</p>
                 <address>
