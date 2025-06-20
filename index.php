@@ -306,6 +306,24 @@
         opacity: 1;
         pointer-events: auto;
     }
+
+    /* Gallerij styling */
+    .gallery-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(191,160,70,0.08);
+  transition: transform 0.25s, box-shadow 0.2s;
+}
+.gallery-thumb:hover .gallery-img {
+  transform: scale(1.06);
+  box-shadow: 0 8px 24px rgba(191,160,70,0.18);
+}
+@media (max-width: 700px) {
+  .gallery-img { height: 120px; }
+}
   </style>
 </head>
 <body>
@@ -340,6 +358,14 @@ $top3 = $pdo->query("
         </p>
       </div>
     </section>
+
+    <div class="container my-4">
+      <div class="alert alert-warning d-flex align-items-center justify-content-center shadow-sm" style="border-radius: 18px; font-size: 1.15rem; background: #fffbe9; color: #bfa046; border: 1.5px solid #ffe08a;">
+        <i class="bi bi-award-fill me-2" style="font-size:1.7rem;"></i>
+        Spaar nu met onze stempelkaart: bij elke knipbeurt een stempel, en bij een volle kaart krijg je een gratis knipbeurt cadeau!
+      </div>
+    </div>
+
     <section class="content" id="services" style="background: #fcfaf6; padding: 3rem 0 2rem 0;">
 
 <section class="content" id="services" style="background: #fcfaf6; padding: 3rem 0 2rem 0;">
